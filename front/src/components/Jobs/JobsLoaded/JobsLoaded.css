@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.job {
+  display: block;
+  color: black;
+  border: 1px solid silver;
+  transition: all .15s ease-in-out;
+  flex-basis: 49%;
+  margin-bottom: 1.5em;
+  min-width: 27em;
+
+  &:hover {
+    box-shadow: 0px 0px 2px #3f3f3f;
+    transform: scale(1.025);
+  }
+}
+
+.jobPosition {
+  padding: .7em;
+  border-bottom: 1px solid silver;
+  background: rgba(189, 189, 189, 0.08);
+
+  & h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    transform: translate3d( 0, 0, 0);
+  }
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 3.6em;
+  padding: 1em;
+  -webkit-font-smoothing: antialiased;
+  transform: translate3d( 0, 0, 0);
+}

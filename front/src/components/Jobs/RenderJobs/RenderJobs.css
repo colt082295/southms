@@ -1,0 +1,13 @@
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 3.6em;
+}
+
+.container {
+  display: flex;
+}
+
+.jobs {
+  flex-basis: 85%;
+}

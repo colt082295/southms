@@ -1,0 +1,6 @@
+{
+  "name": "JobsSidebar",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./JobsSidebar.js"
+}

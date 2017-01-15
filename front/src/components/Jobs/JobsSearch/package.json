@@ -1,0 +1,6 @@
+{
+  "name": "JobsSearch",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./JobsSearch.js"
+}

@@ -15,18 +15,26 @@ return [
                 ];
             },
         ],
-        'api/jobs.json' => [
-            'elementType' => 'Entry',
-            'criteria' => ['section' => 'jobs'],
-            'transformer' => function(EntryModel $entry) {
-                return [
-                    'title' => $entry->title,
-                    'position' => $entry->position,
-                    'url' => $entry->url,
-                    'jsonUrl' => UrlHelper::getUrl("jobs/{$entry->id}.json")
-                ];
-            },
-        ],
+        'api/jobs.json' => function() {
+          HeaderHelper::setHeader([
+              'Access-Control-Allow-Origin' => 'http://192.168.0.25'
+          ]);
+            return [
+                'elementType' => 'Entry',
+                'criteria' => ['section' => 'jobs'],
+                'transformer' => function(EntryModel $entry) {
+                    return [
+                        'id' => $entry->id,
+                        'position' => $entry->position,
+                        'description' => (string) $entry->description,
+                        'salary' => $entry->salary,
+                        'uri' => $entry->uri,
+                        'url' => $entry->url,
+                        'jsonUrl' => UrlHelper::getUrl("jobs/{$entry->id}.json")
+                    ];
+                },
+            ];
+        },
         'api/jobs/<entryId:\d+>.json' => function($entryId) {
             return [
                 'elementType' => 'Entry',
@@ -35,10 +43,15 @@ return [
                 'first' => true,
                 'transformer' => function(EntryModel $entry) {
                     return [
-                        'title' => $entry->title,
+                        'id' => $entry->id,
+                        'position' => $entry->position,
+                        'description' => (string) $entry->description,
+                        'type' => $entry->jobType,
+                        'category' => $entry->category,
+                        'salary' => $entry->salary,
+                        'uri' => $entry->uri,
                         'url' => $entry->url,
                         'body' => $entry->body,
-                        'position' => $entry->position,
                     ];
                 },
             ];
@@ -48,8 +61,10 @@ return [
             'criteria' => ['section' => 'events'],
             'transformer' => function(EntryModel $entry) {
                 return [
+                    'id' => $entry->id,
                     'title' => $entry->title,
                     'eventName' => $entry->eventName,
+                    'uri' => $entry->uri,
                     'url' => $entry->url,
                     'jsonUrl' => UrlHelper::getUrl("events/{$entry->id}.json")
                 ];
@@ -63,10 +78,27 @@ return [
                 'first' => true,
                 'transformer' => function(EntryModel $entry) {
                     return [
+                        'id' => $entry->id,
                         'title' => $entry->title,
                         'eventName' => $entry->eventName,
+                        'uri' => $entry->uri,
                         'url' => $entry->url,
                         'body' => $entry->body,
+                    ];
+                },
+            ];
+        },
+        'api/search.json' => function() {
+            return [
+                'elementType' => 'Entry',
+                'criteria' => [
+                    'search' => (craft()->request->getParam('search')) ? craft()->request->getParam('search') : ''
+                ],
+                'first' => true,
+                'transformer' => function(EntryModel $entry) {
+                    return [
+                        'title' => $entry->title,
+                        'url' => $entry->url,
                     ];
                 },
             ];

@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Layout.css';
 import Header from '../Header';
-import Feedback from '../Feedback';
 import Footer from '../Footer';
 
 class Layout extends React.Component {
@@ -15,7 +14,6 @@ class Layout extends React.Component {
       <div>
         <Header />
         {this.props.children}
-        <Feedback />
         <Footer />
       </div>
     );
