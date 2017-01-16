@@ -1,0 +1,6 @@
+{
+  "name": "JobLoading",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./JobLoading.js"
+}

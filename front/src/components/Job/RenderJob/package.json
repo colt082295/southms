@@ -1,0 +1,6 @@
+{
+  "name": "RenderJob",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./RenderJob.js"
+}

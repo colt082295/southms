@@ -17,7 +17,7 @@ return [
         ],
         'api/jobs.json' => function() {
           HeaderHelper::setHeader([
-              'Access-Control-Allow-Origin' => 'http://192.168.0.25'
+              'Access-Control-Allow-Origin' => '*'
           ]);
             return [
                 'elementType' => 'Entry',
@@ -36,6 +36,9 @@ return [
             ];
         },
         'api/jobs/<entryId:\d+>.json' => function($entryId) {
+          HeaderHelper::setHeader([
+              'Access-Control-Allow-Origin' => '*'
+          ]);
             return [
                 'elementType' => 'Entry',
                 'criteria' => ['id' => $entryId],

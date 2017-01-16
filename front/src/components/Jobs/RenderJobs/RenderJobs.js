@@ -19,7 +19,7 @@ class RenderJobs extends React.Component {
 
   render() {
     let render = null;
-    if (this.props.loading) {
+    if (typeof this.props.jobs.data == 'undefined' && !this.props.jobs.data.length > 0) {
       render = <JobsLoading />;
     } else {
       render = <JobsLoaded jobs={this.props.jobs} />;

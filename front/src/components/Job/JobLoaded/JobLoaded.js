@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './JobsLoaded.css';
+import s from './JobLoaded.css';
 
-class JobsLoaded extends React.Component {
+class JobLoaded extends React.Component {
   /*
   static propTypes = {
     news: PropTypes.arrayOf(PropTypes.shape({
@@ -14,24 +14,22 @@ class JobsLoaded extends React.Component {
   */
 
   render() {
+    const data = this.props.job;
+
     return (
       <div className={s.root}>
         <div className={s.container}>
-          {this.props.jobs.data.map(function (job, i) {
-            return (
-                <a href={job.url} className={s.job} key={job.id}>
+                <div className={s.job}>
                   <div className={s.jobPosition}>
-                    <h3>{job.position}</h3>
+                    <h3>{data.position}</h3>
                   </div>
-                  <div className={s.description} dangerouslySetInnerHTML={{ __html: job.description }}>
+                  <div className={s.description} dangerouslySetInnerHTML={{ __html: data.description }}>
                   </div>
-                </a>
-            );
-          })}
+                </div>
         </div>
       </div>
     );
   }
 }
 
-export default withStyles(s)(JobsLoaded);
+export default withStyles(s)(JobLoaded);
