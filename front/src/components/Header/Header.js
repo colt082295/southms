@@ -26,27 +26,30 @@ class Header extends React.Component {
     return (
       <Menu>
         <Menu.Item
-          name='editorials'
-          active={activeItem === 'editorials'}
+          name='home'
+          active={activeItem === 'home'}
           onClick={this.handleItemClick}
+          href="/"
         >
-          Editorials
+          Home
         </Menu.Item>
 
         <Menu.Item
-          name='reviews'
-          active={activeItem === 'reviews'}
+          name='jobs'
+          active={activeItem === 'jobs'}
           onClick={this.handleItemClick}
+          href="/jobs"
         >
-          Reviews
+          Jobs
         </Menu.Item>
 
         <Menu.Item
-          name='upcomingEvents'
-          active={activeItem === 'upcomingEvents'}
+          name='events'
+          active={activeItem === 'events'}
           onClick={this.handleItemClick}
+          href="/events"
         >
-          Upcoming Events
+          Events
         </Menu.Item>
       </Menu>
     )

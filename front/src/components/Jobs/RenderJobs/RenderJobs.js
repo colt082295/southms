@@ -28,7 +28,7 @@ class RenderJobs extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <JobsSidebar />
+          <JobsSidebar jobs={this.props.jobs} />
           <div className={s.jobs}>
             {render}
           </div>

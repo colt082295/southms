@@ -28,6 +28,7 @@
     "lodash": "^4.17.4",
     "node-fetch": "^1.6.3",
     "normalize.css": "^5.0.0",
+    "numeral": "^2.0.4",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "path-to-regexp": "^1.7.0",

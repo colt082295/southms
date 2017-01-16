@@ -30,6 +30,17 @@ return [
                         'salary' => $entry->salary,
                         'uri' => $entry->uri,
                         'url' => $entry->url,
+                        'allCategories' => [
+                          'Technology',
+                          'Real Estate',
+                          'Customer Service'
+                        ],
+                        'allJobTypes' => [
+                          'Full Time',
+                          'Part Time',
+                          'Contract',
+                          'Intern'
+                        ],
                         'jsonUrl' => UrlHelper::getUrl("jobs/{$entry->id}.json")
                     ];
                 },

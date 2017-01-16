@@ -1,3 +1,9 @@
 .sidebar {
   flex-basis: 15%;
 }
+
+:global(.item) {
+  &:hover {
+    background: rgba(245, 245, 245, 0.3) !important;
+  }
+}

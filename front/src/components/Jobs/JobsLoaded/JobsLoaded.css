@@ -42,7 +42,7 @@
 .description {
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 3.6em;
+  height: 4em;
   padding: 1em;
   -webkit-font-smoothing: antialiased;
   transform: translate3d( 0, 0, 0);
