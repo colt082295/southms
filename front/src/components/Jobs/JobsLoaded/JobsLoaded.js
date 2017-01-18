@@ -16,14 +16,18 @@ class JobsLoaded extends React.Component {
   };
   */
 
+  state = {
+    jobs: this.props.jobs.data,
+  }
+
   render() {
 
     return (
       <div className={s.root}>
         <div className={s.container}>
-          {this.props.jobs.data.map(function (job, i) {
+          {this.state.jobs.map(function (job, i) {
 
-            job.salary = Numeral(job.salary).format('0,0[.]00');
+            job.salary = Numeral(job.salary).format('$0,0[.]00');
             job.time = Moment(job.dateCreated.date).format("M/D - ha");
 
 

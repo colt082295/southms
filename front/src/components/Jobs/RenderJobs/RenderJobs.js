@@ -19,10 +19,18 @@ class RenderJobs extends React.Component {
   */
 
   state = {
+    jobs: this.props.jobs,
+    type: [],
+    category: [],
+    order: 'asc',
+    orderParam: 'dateCreated',
+    url: 'http://192.168.0.25/test-craft2/craft/app/index.php/api/jobs.json?',
     location: [],
+    loading: false,
   }
 
   componentDidMount() {
+    /*
     const _this = this;
     console.log("IT DID MOUNT!");
     // This is getting the user's geolcation and converting it (using Google api) to an actual address. Look up the usage, etc on this.
@@ -54,20 +62,46 @@ class RenderJobs extends React.Component {
             console.log(location);
             _this.setState({ location: location.address });
         });
+        */
   }
-
+  onLoadChange(load) {
+    this.setState(load);
+  }
+  changeJobs(jobs) {
+    this.setState({
+      jobs: jobs,
+    });
+  }
+  changeBasicFilter(order, orderParam) {
+    this.setState({
+      order: order,
+      orderParam: orderParam,
+    });
+  }
+  // Later I'll need to figure out how way to consolidate these functions into as little as possible.
+  updateJobType(type) {
+    // var newArray = this.state.type.slice();
+    // newArray.push(type);
+    //this.setState({ type: newArray });
+    this.setState({ type: type });
+  }
+  updateJobCategory(category) {
+    console.log("Category update");
+    this.setState({ category: category });
+  }
   render() {
     let render = null;
-    if (typeof this.props.jobs.data == 'undefined' && !this.props.jobs.data.length > 0) {
+    if (typeof this.state.jobs.data == 'undefined' && !this.state.jobs.data.length > 0 || this.state.loading == true) {
       render = <JobsLoading />;
     } else {
-      render = <JobsLoaded jobs={this.props.jobs} />;
+      render = <JobsLoaded jobs={this.state.jobs} />;
     }
 
     return (
       <div className={s.root}>
+        <BasicFilter onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeJobs.bind(this)} changeBasicFilter={this.changeBasicFilter.bind(this)} data={this.state} />
         <div className={s.container}>
-          <JobsSidebar jobs={this.props.jobs} jobInfo={this.props.jobInfo} location={this.state.location} />
+          <JobsSidebar jobs={this.state.jobs} jobInfo={this.props.jobInfo} location={this.state.location} onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeJobs.bind(this)} data={this.state} updateJobCategory={this.updateJobCategory.bind(this)} updateJobType={this.updateJobType.bind(this)} />
           <div className={s.jobs}>
             {render}
           </div>

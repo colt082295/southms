@@ -44,8 +44,8 @@ class JobLoaded extends React.Component {
                   </div>
                   <div className={s.description} dangerouslySetInnerHTML={{ __html: data.description }}>
                   </div>
-                  <Button className={s.apply} positive fluid>Apply</Button>
-                    <Modal dimmer={"blurring"} closeIcon='close' >
+
+                    <Modal dimmer={"blurring"} closeIcon='close' trigger={<Button className={s.apply} positive fluid>Apply</Button>}>
                       <Modal.Header>Applying to {data.position}</Modal.Header>
                       <Modal.Content image>
                         <Modal.Description>

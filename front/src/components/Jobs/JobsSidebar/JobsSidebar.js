@@ -20,7 +20,75 @@ class JobsSidebar extends React.Component {
   componentWillUnmount() {
     this.serverRequest.abort();
   }
+
+  jobTypeChanged(event, data) {
+    const _this = this;
+    console.log("Job Type changed", event.target, data);
+    _this.props.onLoadChange({loading: true});
+    /*
+    this.setState({
+      type: data.value,
+    });
+    */
+    var val = this.props.data.type;
+    if(data.checked) {
+      val.push(data.value);
+    } else {
+      // I'm sure there's a better way
+        for(var i = val.length - 1; i >= 0; i--) {
+            if(val[i] === data.value) {
+               val.splice(i, 1);
+            }
+        }
+        console.log("Array now:", val);
+    }
+    this.props.updateJobType(val);
+    val = val.join();
+    this.serverRequest =
+      axios
+      // I have to figure out some way to get the value from the other
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + '&type=' + val)
+        .then(function(result) {
+          _this.props.changeJobs(result.data)
+          _this.props.onLoadChange({loading: false});
+        })
+  }
+
+  jobCateogryChanged(event, data) {
+    const _this = this;
+    console.log("Job Category changed", event.target, data.value);
+    _this.props.onLoadChange({loading: true});
+    /*
+    this.setState({
+      category: data.value,
+    });
+    */
+    var val = this.props.data.category;
+    if(data.checked) {
+      val.push(data.value);
+    } else {
+      // I'm sure there's a better way
+        for(var i = val.length - 1; i >= 0; i--) {
+            if(val[i] === data.value) {
+               val.splice(i, 1);
+            }
+        }
+        console.log("Array now:", val);
+    }
+    this.props.updateJobCategory(val);
+    val = val.join();
+    this.serverRequest =
+      axios
+      // I have to figure out some way to get the value from the other
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + '&type=' + this.props.data.type + "&category=" + val)
+        .then(function(result) {
+          _this.props.changeJobs(result.data)
+          _this.props.onLoadChange({loading: false});
+        })
+  }
+
   render() {
+    const _this = this;
     return (
       <div className={s.sidebar}>
         <Menu vertical>
@@ -30,7 +98,6 @@ class JobsSidebar extends React.Component {
             <Menu.Menu>
               <Menu.Item >
                 <Form>
-                  {console.log(this.props)}
                   {this.props.jobInfo.allCategories.map(function (job, i) {
 
                     return (
@@ -39,6 +106,8 @@ class JobsSidebar extends React.Component {
                         control={Checkbox}
                         label={{ children: job }}
                         key={i}
+                        onChange={_this.jobCateogryChanged.bind(_this)}
+                        value={job}
                       />
 
 
@@ -59,13 +128,15 @@ class JobsSidebar extends React.Component {
               <Menu.Item >
                 <Form>
                   {this.props.jobInfo.allTypes.map(function (job, i) {
-
+                    job = JSON.parse(job);
                     return (
 
                       <Form.Field
                         control={Checkbox}
-                        label={{ children: job }}
+                        label={{ children: job.text }}
                         key={i}
+                        onChange={_this.jobTypeChanged.bind(_this)}
+                        value={job.value}
                       />
 
 
@@ -99,6 +170,28 @@ class JobsSidebar extends React.Component {
 
 
                   })}
+                </Form>
+              </Menu.Item>
+            </Menu.Menu>
+          </Menu.Item>
+
+          <Menu.Item>
+            <Menu.Header>Salary</Menu.Header>
+
+            <Menu.Menu>
+              <Menu.Item >
+                <Form className={s.salaryInput}>
+
+
+                  <Form.Group>
+                    <Form.Input label='Min $' name='min-salary' placeholder='0' />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Input label='Max $' name='max-salary' placeholder='' />
+                  </Form.Group>
+
+
+
                 </Form>
               </Menu.Item>
             </Menu.Menu>

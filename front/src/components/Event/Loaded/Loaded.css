@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1% 2%;
+}
+
+.job {
+  display: block;
+  color: black;
+  border: 1px solid silver;
+  transition: all .15s ease-in-out;
+  min-width: 27em;
+  width: 100%;
+  min-height: 15em;
+  position: relative;
+}
+
+.jobPosition {
+  padding: .7em;
+  border-bottom: 1px solid silver;
+  background: rgba(189, 189, 189, 0.08);
+
+  & h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    transform: translate3d( 0, 0, 0);
+  }
+}
+
+.description {
+  overflow: hidden;
+  padding: 1em 1em 3em 1em;
+}
+
+/*
+.image {
+  width: 100%;
+
+  & img {
+    max-width: 100%;
+  }
+}
+*/
+
+.image {
+  height: 40vh;
+}
+
+.imageBackground {
+  height: 100%;
+  width: 100%;
+  background-size: cover !important;
+  background-position: center center !important;
+}

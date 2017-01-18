@@ -32,7 +32,7 @@ return [
                       'Architecture / Drafting',
                       'Art / Design / Entertainment',
                       'Banking / Loan / Insurance',
-                      /*
+
                       'Beauty / Wellness',
                       'Business Development / Consulting',
                       'Education',
@@ -59,14 +59,15 @@ return [
                       'Sports / Fitness',
                       'Travel / Transportation',
                       'Writing / Editing / Publishing',
-                      'Other'
-                      */
+                      'Other',
+                      'Technology'
+
                     ],
                     'allTypes' => [
-                      'Full Time',
-                      'Part Time',
-                      'Contractor',
-                      'Intern'
+                      json_encode(array(text => "Full Time", 'value' => "fullTime"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "Part Time", 'value' => "partTime"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "Contractor", 'value' => "contractor"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "Intern", 'value' => "intern"), JSON_FORCE_OBJECT)
                     ],
                     'allLocations' => [
                       'Ocean Springs',
@@ -86,66 +87,43 @@ return [
           HeaderHelper::setHeader([
               'Access-Control-Allow-Origin' => '*'
           ]);
+          $orderParam = craft()->request->getQuery('orderParam');
+          $order = craft()->request->getQuery('order');
+          $jobType = craft()->request->getQuery('type');
+          if(empty($jobType)) {
+            $jobTypes = [];
+          } else {
+            $jobTypes = explode(',', $jobType);
+
+          }
+          $category = craft()->request->getQuery('category');
+          if(empty($category)) {
+            $categories = [];
+          } else {
+            $categories = explode(',', $category);
+
+          }
+
+
             return [
                 'elementType' => 'Entry',
-                'criteria' => ['section' => 'jobs'],
+                'criteria' => [
+                  'section' => 'jobs',
+                  'order' => ''.$orderParam.' '.$order.'',
+                  'jobType' => $jobTypes,
+                  'category' => $categories,
+                ],
                 'transformer' => function(EntryModel $entry) {
                     return [
-                        'id' => $entry->id,
+                        'id' => [$entry->id, $jobTypes],
                         'position' => $entry->position,
                         'description' => (string) $entry->description,
                         'salary' => $entry->salary,
                         'category' => $entry->category,
                         'dateCreated' => $entry->dateCreated,
+                        'type' => $entry->jobType,
                         'uri' => $entry->uri,
                         'url' => $entry->url,
-                        'allCategories' => [
-                          'Accounting / Finance',
-                          'Administrative',
-                          'Analyst',
-                          'Architecture / Drafting',
-                          'Art / Design / Entertainment',
-                          'Banking / Loan / Insurance',
-                          'Beauty / Wellness',
-                          'Business Development / Consulting',
-                          'Education',
-                          'Engineering (Non-software)',
-                          'Facilities / General Labor',
-                          'Hospitality',
-                          'Human Resources',
-                          'Installation / Maintenance / Repair',
-                          'Legal',
-                          'Manufacturing / Production / Construction',
-                          'Marketing / Advertising / PR',
-                          'Medical / Healthcare',
-                          'Non-Profit / Volunteering',
-                          'Product / Project Management',
-                          'Real Estate',
-                          'Restaurant / Food Services',
-                          'Retail',
-                          'Sales / Customer Care',
-                          'Science / Research',
-                          'Security / Law Enforcement',
-                          'Senior Management',
-                          'Skilled Trade',
-                          'Software Development / IT',
-                          'Sports / Fitness',
-                          'Travel / Transportation',
-                          'Writing / Editing / Publishing',
-                          'Other'
-                        ],
-                        'allJobTypes' => [
-                          'Full Time',
-                          'Part Time',
-                          'Contract',
-                          'Intern'
-                        ],
-                        'allLocations' => [
-                          'Ocean Springs',
-                          'St. Martin',
-                          'Hattiesburg',
-                          'D\'Iberville'
-                        ],
                         'jsonUrl' => UrlHelper::getUrl("jobs/{$entry->id}.json")
                     ];
                 },
@@ -162,6 +140,7 @@ return [
                 'first' => true,
                 'transformer' => function(EntryModel $entry) {
                     return [
+                        'relatedTo' => ['position' => $position],
                         'id' => $entry->id,
                         'position' => $entry->position,
                         'description' => (string) $entry->description,
@@ -195,6 +174,30 @@ return [
                       'uri' => $entry->uri,
                       'url' => $entry->url,
                       'jsonUrl' => UrlHelper::getUrl("events/{$entry->id}.json")
+                  ];
+              },
+          ];
+      },
+      'api/events/<entryId:\d+>.json' => function($entryId) {
+        HeaderHelper::setHeader([
+            'Access-Control-Allow-Origin' => '*'
+        ]);
+          return [
+              'elementType' => 'Entry',
+              'criteria' => ['id' => $entryId],
+              'first' => true,
+              'transformer' => function(EntryModel $entry) {
+                  return [
+                    'id' => $entry->id,
+                    'title' => $entry->title,
+                    'eventName' => $entry->eventName,
+                    'eventDescription' => (string) $entry->eventDescription,
+                    'eventLocation' => $entry->eventLocation,
+                    'eventTime' => $entry->eventTime,
+                    'dateCreated' => $entry->dateCreated,
+                    'uri' => $entry->uri,
+                    'url' => $entry->url,
+                    'jsonUrl' => UrlHelper::getUrl("events/{$entry->id}.json")
                   ];
               },
           ];

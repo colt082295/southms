@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react';
-import axios from 'axios';
-import RenderJobs from '../../components/Jobs/RenderJobs';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Jobs.css';
+import Render from '../../components/Event/Render';
+import s from './Event.css';
 
-class Jobs extends React.Component {
+class Event extends React.Component {
   /*
   static propTypes = {
     news: PropTypes.arrayOf(PropTypes.shape({
@@ -21,10 +20,6 @@ class Jobs extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      jobs: [],
-      loading: true,
-    };
   }
 
   componentDidMount() {
@@ -38,11 +33,11 @@ class Jobs extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <RenderJobs loading={this.state.loading} jobs={this.props.jobs} jobInfo={this.props.jobInfo} />
+          <Render event={this.props.event} />
         </div>
       </div>
     );
   }
 }
 
-export default withStyles(s)(Jobs);
+export default withStyles(s)(Event);

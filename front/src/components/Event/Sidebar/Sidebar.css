@@ -1,0 +1,17 @@
+.sidebar {
+  flex-basis: 15%;
+}
+
+.sidebar .item {
+  &:hover {
+    background: rgba(245, 245, 245, 0.3) !important;
+  }
+}
+
+.title {
+  font-weight: 600;
+}
+
+.description {
+  user-select: auto !important;
+}
