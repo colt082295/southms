@@ -10,4 +10,5 @@
 
 .jobs {
   flex-basis: 85%;
+  position: relative;
 }

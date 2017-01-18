@@ -17,26 +17,22 @@ class JobsBasicFilter extends React.Component {
 
   render() {
 
-    var friendOptions = [
-      {
-        text: 'Jenny Hess',
-        value: 'Jenny Hess',
-         image: { avatar: true, src: '/assets/images/avatar/small/jenny.jpg' },
-       }
+     const options = [
+       { text: 'Date Added', value: 'dateAdded' },
+       { text: 'Distance', value: 'distance' },
      ]
 
-     const options = [
-       { text: 'All', value: 'all' },
-       { text: 'Articles', value: 'articles' },
-       { text: 'Products', value: 'products' },
+     const options2 = [
+       { text: 'Ascending', value: 'asc' },
+       { text: 'Descending', value: 'desc' },
      ]
 
     return (
       <div className={s.container}>
         <Input type='text' placeholder='Search...' action>
     <input />
-    <Select compact options={options} defaultValue='articles' />
-    <Select compact options={options} defaultValue='articles' />
+    <Select compact options={options} defaultValue='dateAdded' />
+    <Select compact options={options2} defaultValue='asc' />
   </Input>
       </div>
     );

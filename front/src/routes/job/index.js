@@ -12,10 +12,10 @@ export default {
 
   async action({ params, path, uri }) {
     // const route = await next();
-    console.log("Running fetch!", params, path, uri);
+    //console.log("Running fetch!", params, path, uri);
     const resp = await fetch('http://192.168.0.25/test-craft2/craft/app/index.php/api/jobs/' + params.id + '.json');
     const data = await resp.json();
-    console.log("Got fetch!", data);
+    //console.log("Got fetch!", data);
     return data && {
       title,
       component: <Layout><Job title={title} job={data} /></Layout>,

@@ -15,6 +15,73 @@ return [
                 ];
             },
         ],
+        'api/job-info.json' => function() {
+          HeaderHelper::setHeader([
+              'Access-Control-Allow-Origin' => '*'
+          ]);
+            return [
+                'elementType' => 'Entry',
+                'criteria' => ['section' => 'jobs'],
+                'first' => true,
+                'transformer' => function(EntryModel $entry) {
+                  return [
+                    'allCategories' => [
+                      'Accounting / Finance',
+                      'Administrative',
+                      'Analyst',
+                      'Architecture / Drafting',
+                      'Art / Design / Entertainment',
+                      'Banking / Loan / Insurance',
+                      /*
+                      'Beauty / Wellness',
+                      'Business Development / Consulting',
+                      'Education',
+                      'Engineering (Non-software)',
+                      'Facilities / General Labor',
+                      'Hospitality',
+                      'Human Resources',
+                      'Installation / Maintenance / Repair',
+                      'Legal',
+                      'Manufacturing / Production / Construction',
+                      'Marketing / Advertising / PR',
+                      'Medical / Healthcare',
+                      'Non-Profit / Volunteering',
+                      'Product / Project Management',
+                      'Real Estate',
+                      'Restaurant / Food Services',
+                      'Retail',
+                      'Sales / Customer Care',
+                      'Science / Research',
+                      'Security / Law Enforcement',
+                      'Senior Management',
+                      'Skilled Trade',
+                      'Software Development / IT',
+                      'Sports / Fitness',
+                      'Travel / Transportation',
+                      'Writing / Editing / Publishing',
+                      'Other'
+                      */
+                    ],
+                    'allTypes' => [
+                      'Full Time',
+                      'Part Time',
+                      'Contractor',
+                      'Intern'
+                    ],
+                    'allLocations' => [
+                      'Ocean Springs',
+                      'St. Martin',
+                      'Gulfport',
+                      'Biloxi',
+                      'Hattiesburg',
+                      'D\'Iberville',
+                    ],
+
+
+                  ];
+                }
+              ];
+            },
         'api/jobs.json' => function() {
           HeaderHelper::setHeader([
               'Access-Control-Allow-Origin' => '*'
@@ -28,18 +95,56 @@ return [
                         'position' => $entry->position,
                         'description' => (string) $entry->description,
                         'salary' => $entry->salary,
+                        'category' => $entry->category,
+                        'dateCreated' => $entry->dateCreated,
                         'uri' => $entry->uri,
                         'url' => $entry->url,
                         'allCategories' => [
-                          'Technology',
+                          'Accounting / Finance',
+                          'Administrative',
+                          'Analyst',
+                          'Architecture / Drafting',
+                          'Art / Design / Entertainment',
+                          'Banking / Loan / Insurance',
+                          'Beauty / Wellness',
+                          'Business Development / Consulting',
+                          'Education',
+                          'Engineering (Non-software)',
+                          'Facilities / General Labor',
+                          'Hospitality',
+                          'Human Resources',
+                          'Installation / Maintenance / Repair',
+                          'Legal',
+                          'Manufacturing / Production / Construction',
+                          'Marketing / Advertising / PR',
+                          'Medical / Healthcare',
+                          'Non-Profit / Volunteering',
+                          'Product / Project Management',
                           'Real Estate',
-                          'Customer Service'
+                          'Restaurant / Food Services',
+                          'Retail',
+                          'Sales / Customer Care',
+                          'Science / Research',
+                          'Security / Law Enforcement',
+                          'Senior Management',
+                          'Skilled Trade',
+                          'Software Development / IT',
+                          'Sports / Fitness',
+                          'Travel / Transportation',
+                          'Writing / Editing / Publishing',
+                          'Other'
                         ],
                         'allJobTypes' => [
                           'Full Time',
                           'Part Time',
                           'Contract',
                           'Intern'
+                        ],
+                        'allLocations' => [
+                          'Ocean Springs',
+                          'St. Martin',
+                          'Hattiesburg',
+                          'D\'Iberville'
                         ],
                         'jsonUrl' => UrlHelper::getUrl("jobs/{$entry->id}.json")
                     ];
@@ -63,6 +168,7 @@ return [
                         'type' => $entry->jobType,
                         'category' => $entry->category,
                         'salary' => $entry->salary,
+                        'dateCreated' => $entry->dateCreated,
                         'uri' => $entry->uri,
                         'url' => $entry->url,
                         'body' => $entry->body,

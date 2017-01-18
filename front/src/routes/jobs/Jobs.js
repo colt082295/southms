@@ -40,7 +40,7 @@ class Jobs extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <BasicFilter />
-          <RenderJobs loading={this.state.loading} jobs={this.props.jobs} />
+          <RenderJobs loading={this.state.loading} jobs={this.props.jobs} jobInfo={this.props.jobInfo} />
         </div>
       </div>
     );

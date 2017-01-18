@@ -13,6 +13,8 @@
   transition: all .15s ease-in-out;
   min-width: 27em;
   width: 100%;
+  min-height: 15em;
+  position: relative;
 }
 
 .jobPosition {
@@ -36,5 +38,16 @@
 
 .description {
   overflow: hidden;
-  padding: 1em;
+  padding: 1em 1em 3em 1em;
+}
+
+.apply {
+  border-top: 1px solid black !important;
+  border-radius: 0 !important;
+  position: absolute !important;
+  bottom: 0 !important;
+}
+
+.fileInput {
+    display: none !important;
 }

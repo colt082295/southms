@@ -47,3 +47,19 @@
   -webkit-font-smoothing: antialiased;
   transform: translate3d( 0, 0, 0);
 }
+
+.jobMeta {
+  background: rgba(251, 251, 251, 0.57);
+  border-bottom: 1px solid silver;
+  text-align: right;
+
+  & p {
+    display: inline-block;
+    padding: .5% 2%;
+    margin: 0;
+
+    & i {
+      margin-right: .5em;
+    }
+  }
+}

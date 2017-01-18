@@ -24,7 +24,13 @@ class Header extends React.Component {
     const { activeItem } = this.state
 
     return (
-      <Menu>
+      <Menu className={s.header}>
+        <Menu.Item href="/" className={s.logo} header>SouthMS</Menu.Item>
+
+        <div className={s.lineContainer}>
+        <div className={s.line}></div>
+        </div>
+
         <Menu.Item
           name='home'
           active={activeItem === 'home'}
