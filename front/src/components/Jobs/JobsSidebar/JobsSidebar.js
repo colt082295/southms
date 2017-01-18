@@ -25,7 +25,7 @@ class JobsSidebar extends React.Component {
       <div className={s.sidebar}>
         <Menu vertical>
           <Menu.Item>
-            <Menu.Header>Category - {this.props.location.city}</Menu.Header>
+            <Menu.Header>Category</Menu.Header>
 
             <Menu.Menu>
               <Menu.Item >

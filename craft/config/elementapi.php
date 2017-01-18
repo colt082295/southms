@@ -176,38 +176,29 @@ return [
                 },
             ];
         },
-        'api/events.json' => [
-            'elementType' => 'Entry',
-            'criteria' => ['section' => 'events'],
-            'transformer' => function(EntryModel $entry) {
-                return [
-                    'id' => $entry->id,
-                    'title' => $entry->title,
-                    'eventName' => $entry->eventName,
-                    'uri' => $entry->uri,
-                    'url' => $entry->url,
-                    'jsonUrl' => UrlHelper::getUrl("events/{$entry->id}.json")
-                ];
-            },
-        ],
-        'api/events/<entryId:\d+>.json' => function($entryId) {
-            return [
-                'elementType' => 'Entry',
-                'criteria' => ['id' => $entryId],
-                'elementsPerPage' => 15,
-                'first' => true,
-                'transformer' => function(EntryModel $entry) {
-                    return [
-                        'id' => $entry->id,
-                        'title' => $entry->title,
-                        'eventName' => $entry->eventName,
-                        'uri' => $entry->uri,
-                        'url' => $entry->url,
-                        'body' => $entry->body,
-                    ];
-                },
-            ];
-        },
+      'api/events.json' => function() {
+        HeaderHelper::setHeader([
+            'Access-Control-Allow-Origin' => '*'
+        ]);
+          return [
+              'elementType' => 'Entry',
+              'criteria' => ['section' => 'events'],
+              'transformer' => function(EntryModel $entry) {
+                  return [
+                      'id' => $entry->id,
+                      'title' => $entry->title,
+                      'eventName' => $entry->eventName,
+                      'eventDescription' => (string) $entry->eventDescription,
+                      'eventLocation' => $entry->eventLocation,
+                      'eventTime' => $entry->eventTime,
+                      'dateCreated' => $entry->dateCreated,
+                      'uri' => $entry->uri,
+                      'url' => $entry->url,
+                      'jsonUrl' => UrlHelper::getUrl("events/{$entry->id}.json")
+                  ];
+              },
+          ];
+      },
         'api/search.json' => function() {
             return [
                 'elementType' => 'Entry',

@@ -1,0 +1,77 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.job {
+  display: block;
+  color: black;
+  border: 1px solid silver;
+  transition: all .15s ease-in-out;
+  flex-basis: 20%;
+  margin-bottom: 1.5em;
+  min-width: 27em;
+
+  &:hover {
+    box-shadow: 0px 0px 2px #3f3f3f;
+    transform: scale(1.025);
+  }
+}
+
+.jobPosition {
+  padding: .7em;
+  text-align: center;
+  border-bottom: 1px solid silver;
+  background: rgba(189, 189, 189, 0.08);
+
+  & h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    transform: translate3d( 0, 0, 0);
+  }
+}
+
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 4em;
+  padding: 1em;
+  -webkit-font-smoothing: antialiased;
+  transform: translate3d( 0, 0, 0);
+}
+
+.jobMeta {
+  background: rgba(251, 251, 251, 0.57);
+  border-bottom: 1px solid silver;
+  text-align: right;
+
+  & p {
+    display: inline-block;
+    padding: .5% 2%;
+    margin: 0;
+
+    & i {
+      margin-right: .5em;
+    }
+  }
+}
+
+.image {
+  height: 15vh;
+}
+
+.imageBackground {
+  height: 100%;
+  width: 100%;
+  background-size: cover !important;
+  background-position: center center !important;
+}

@@ -14,6 +14,7 @@ export default {
     require('./about').default,
     require('./jobs').default,
     require('./job').default,
+    require('./events').default,
 
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
     require('./notFound').default,
