@@ -33,7 +33,7 @@ class JobsBasicFilter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + '&type=' + this.props.data.type)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + data.value + '&type=' + this.props.data.type)
         .then(function(result) {
           _this.props.changeJobs(result.data)
           _this.props.onLoadChange({loading: false});
@@ -51,7 +51,7 @@ class JobsBasicFilter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + '&type=' + this.props.data.type)
+        .get(this.props.data.url + 'orderParam=' + data.value + '&order=' + this.props.data.order + '&type=' + this.props.data.type)
         .then(function(result) {
           _this.props.changeJobs(result.data)
           _this.props.onLoadChange({loading: false});

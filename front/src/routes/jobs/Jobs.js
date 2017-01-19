@@ -38,7 +38,7 @@ class Jobs extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <RenderJobs loading={this.state.loading} jobs={this.props.jobs} jobInfo={this.props.jobInfo} />
+          <RenderJobs loading={this.state.loading} jobs={this.props.jobs} jobInfo={this.props.jobInfo} pagination={this.props.jobs.meta.pagination} />
         </div>
       </div>
     );

@@ -17,6 +17,7 @@ export default {
     const jobs = await resp.json();
     const resp2 = await fetch('http://192.168.0.25/test-craft2/craft/app/index.php/api/job-info.json');
     const jobInfo = await resp2.json();
+    console.log("Pages:", jobs.meta.pagination.total_pages)
     //console.log("Got fetch!", jobs, jobInfo);
     return jobs && jobInfo && {
       title,

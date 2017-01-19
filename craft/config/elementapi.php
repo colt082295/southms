@@ -15,6 +15,30 @@ return [
                 ];
             },
         ],
+        'api/cities.json' => function() {
+          HeaderHelper::setHeader([
+              'Access-Control-Allow-Origin' => '*'
+          ]);
+            return [
+                'elementType' => 'Entry',
+                'criteria' => ['section' => 'jobs'],
+                'first' => true,
+                'transformer' => function(EntryModel $entry) {
+                  return [
+                    'locations' => [
+                      json_encode(array(county => "Jackson", 'cities' => [
+                        'Ocean Springs',
+                        'St. Martin',
+                        'Gulfport',
+                        'Biloxi',
+                        'D\'Iberville',
+                        'Gulfport'
+                        ]), JSON_FORCE_OBJECT),
+                    ]
+                  ];
+                }
+              ];
+            },
         'api/job-info.json' => function() {
           HeaderHelper::setHeader([
               'Access-Control-Allow-Origin' => '*'
@@ -32,7 +56,8 @@ return [
                       'Architecture / Drafting',
                       'Art / Design / Entertainment',
                       'Banking / Loan / Insurance',
-
+                      'Technology',
+                      /*
                       'Beauty / Wellness',
                       'Business Development / Consulting',
                       'Education',
@@ -60,7 +85,7 @@ return [
                       'Travel / Transportation',
                       'Writing / Editing / Publishing',
                       'Other',
-                      'Technology'
+                      */
 
                     ],
                     'allTypes' => [
@@ -107,6 +132,8 @@ return [
 
             return [
                 'elementType' => 'Entry',
+                'elementsPerPage' => 2,
+                'pageParam' => 'pg',
                 'criteria' => [
                   'section' => 'jobs',
                   'order' => ''.$orderParam.' '.$order.'',
@@ -115,7 +142,7 @@ return [
                 ],
                 'transformer' => function(EntryModel $entry) {
                     return [
-                        'id' => [$entry->id, $jobTypes],
+                        'id' => $entry->id,
                         'position' => $entry->position,
                         'description' => (string) $entry->description,
                         'salary' => $entry->salary,
@@ -136,7 +163,6 @@ return [
             return [
                 'elementType' => 'Entry',
                 'criteria' => ['id' => $entryId],
-                'elementsPerPage' => 15,
                 'first' => true,
                 'transformer' => function(EntryModel $entry) {
                     return [

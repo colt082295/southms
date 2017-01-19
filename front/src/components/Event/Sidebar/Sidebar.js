@@ -14,7 +14,7 @@ class Sidebar extends React.Component {
       <div className={s.sidebar}>
         <Menu vertical>
           <Menu.Item name='location' onClick={this.handleItemClick}>
-            <span className={s.title}>Location:</span> <span className={s.description}><a target="_blank" href={`${'http://maps.google.com/?q=', data.eventLocation}`} >{data.eventLocation}</a></span>
+            <span className={s.title}>Location:</span> <span className={s.description}><a target="_blank" href={'http://maps.google.com/?q=' + data.eventLocation} >{data.eventLocation}</a></span>
           </Menu.Item>
 
           <Menu.Item name='time' onClick={this.handleItemClick}>

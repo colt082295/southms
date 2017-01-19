@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
   }
 
   componentWillUnmount() {
-    this.serverRequest.abort();
+    //this.serverRequest.abort();
   }
   render() {
     return (

@@ -18,7 +18,7 @@ class JobsSidebar extends React.Component {
   }
 
   componentWillUnmount() {
-    this.serverRequest.abort();
+    // this.serverRequest.abort();
   }
 
   jobTypeChanged(event, data) {

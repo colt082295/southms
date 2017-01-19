@@ -37,6 +37,7 @@ class JobsLoaded extends React.Component {
                       <h3>{job.position}</h3>
                     </div>
                     <div className={s.jobMeta}>
+                      <p><i className="fa fa-briefcase" aria-hidden="true"></i>{job.type.label}</p>
                       <p><i className="fa fa-tag" aria-hidden="true"></i>{job.category.label}</p>
                       <p><i className="fa fa-money" aria-hidden="true"></i>{job.salary}</p>
                       <p><i className="fa fa-calendar" aria-hidden="true"></i>{job.time}</p>
@@ -47,7 +48,7 @@ class JobsLoaded extends React.Component {
                 </a>
             );
           })}
-          <Pagination />
+          <Pagination pagination={this.props.pagination} />
         </div>
       </div>
     );

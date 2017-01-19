@@ -94,7 +94,7 @@ class RenderJobs extends React.Component {
     if (typeof this.state.jobs.data == 'undefined' && !this.state.jobs.data.length > 0 || this.state.loading == true) {
       render = <JobsLoading />;
     } else {
-      render = <JobsLoaded jobs={this.state.jobs} />;
+      render = <JobsLoaded jobs={this.state.jobs} pagination={this.props.pagination} />;
     }
 
     return (
