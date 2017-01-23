@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react';
 import geolocator from 'geolocator';
 import JobsLoading from '../JobsLoading';
 import JobsLoaded from '../JobsLoaded';
-import JobsSidebar from '../JobsSidebar';
-import BasicFilter from '../BasicFilter';
+import Filter from '../Filter';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './RenderJobs.css';
 
@@ -22,6 +21,7 @@ class RenderJobs extends React.Component {
     jobs: this.props.jobs,
     type: [],
     category: [],
+    city: [],
     order: 'asc',
     orderParam: 'dateCreated',
     url: 'http://192.168.0.25/test-craft2/craft/app/index.php/api/jobs.json?',
@@ -79,6 +79,12 @@ class RenderJobs extends React.Component {
     });
   }
   // Later I'll need to figure out how way to consolidate these functions into as little as possible.
+  updateJobLocation(city) {
+    // var newArray = this.state.type.slice();
+    // newArray.push(type);
+    //this.setState({ type: newArray });
+    this.setState({ city: city });
+  }
   updateJobType(type) {
     // var newArray = this.state.type.slice();
     // newArray.push(type);
@@ -99,9 +105,8 @@ class RenderJobs extends React.Component {
 
     return (
       <div className={s.root}>
-        <BasicFilter onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeJobs.bind(this)} changeBasicFilter={this.changeBasicFilter.bind(this)} data={this.state} />
+        <Filter onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeJobs.bind(this)} changeBasicFilter={this.changeBasicFilter.bind(this)} data={this.state} jobs={this.state.jobs} jobInfo={this.props.jobInfo} location={this.state.location} onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeJobs.bind(this)} data={this.state} updateJobCategory={this.updateJobCategory.bind(this)} updateJobType={this.updateJobType.bind(this)} updateJobLocation={this.updateJobLocation.bind(this)} />
         <div className={s.container}>
-          <JobsSidebar jobs={this.state.jobs} jobInfo={this.props.jobInfo} location={this.state.location} onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeJobs.bind(this)} data={this.state} updateJobCategory={this.updateJobCategory.bind(this)} updateJobType={this.updateJobType.bind(this)} />
           <div className={s.jobs}>
             {render}
           </div>

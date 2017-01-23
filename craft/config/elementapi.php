@@ -50,13 +50,11 @@ return [
                 'transformer' => function(EntryModel $entry) {
                   return [
                     'allCategories' => [
-                      'Accounting / Finance',
-                      'Administrative',
-                      'Analyst',
-                      'Architecture / Drafting',
-                      'Art / Design / Entertainment',
-                      'Banking / Loan / Insurance',
-                      'Technology',
+                      json_encode(array(text => "Finance", 'value' => "accountingFinance"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "Administrative", 'value' => "administrative"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "Analyst", 'value' => "analyst"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "Art", 'value' => "art"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "Technology", 'value' => "technology"), JSON_FORCE_OBJECT)
                       /*
                       'Beauty / Wellness',
                       'Business Development / Consulting',
@@ -95,12 +93,12 @@ return [
                       json_encode(array(text => "Intern", 'value' => "intern"), JSON_FORCE_OBJECT)
                     ],
                     'allLocations' => [
-                      'Ocean Springs',
-                      'St. Martin',
-                      'Gulfport',
-                      'Biloxi',
-                      'Hattiesburg',
-                      'D\'Iberville',
+                      json_encode(array(text => "Ocean Springs", 'value' => "oceanSprings"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "St. Martin", 'value' => "stMartin"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "Gulfport", 'value' => "gulfport"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "Biloxi", 'value' => "biloxi"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "Hattiesburg", 'value' => "hattiesburg"), JSON_FORCE_OBJECT),
+                      json_encode(array(text => "D'Iberville", 'value' => "d'iberville"), JSON_FORCE_OBJECT)
                     ],
 
 
@@ -115,13 +113,16 @@ return [
           $orderParam = craft()->request->getQuery('orderParam');
           $order = craft()->request->getQuery('order');
           $jobType = craft()->request->getQuery('type');
+          $category = craft()->request->getQuery('category');
+          $city = craft()->request->getQuery('city');
+
           if(empty($jobType)) {
             $jobTypes = [];
           } else {
             $jobTypes = explode(',', $jobType);
 
           }
-          $category = craft()->request->getQuery('category');
+
           if(empty($category)) {
             $categories = [];
           } else {
@@ -129,16 +130,24 @@ return [
 
           }
 
+          if(empty($city)) {
+            $cities = [];
+          } else {
+            $cities = explode(',', $city);
+
+          }
+
 
             return [
                 'elementType' => 'Entry',
-                'elementsPerPage' => 2,
+                'elementsPerPage' => 4,
                 'pageParam' => 'pg',
                 'criteria' => [
                   'section' => 'jobs',
                   'order' => ''.$orderParam.' '.$order.'',
                   'jobType' => $jobTypes,
                   'category' => $categories,
+                  'jobCity' => $cities,
                 ],
                 'transformer' => function(EntryModel $entry) {
                     return [
@@ -147,6 +156,8 @@ return [
                         'description' => (string) $entry->description,
                         'salary' => $entry->salary,
                         'category' => $entry->category,
+                        'city' => $entry->jobCity,
+                        'address' => $entry->jobAddress,
                         'dateCreated' => $entry->dateCreated,
                         'type' => $entry->jobType,
                         'uri' => $entry->uri,
@@ -182,19 +193,45 @@ return [
             ];
         },
       'api/events.json' => function() {
+        $orderParam = craft()->request->getQuery('orderParam');
+        $order = craft()->request->getQuery('order');
+        $category = craft()->request->getQuery('category');
+        $city = craft()->request->getQuery('city');
+
+        if(empty($category)) {
+          $categories = [];
+        } else {
+          $categories = explode(',', $category);
+
+        }
+
+        if(empty($city)) {
+          $cities = [];
+        } else {
+          $cities = explode(',', $city);
+
+        }
+
         HeaderHelper::setHeader([
             'Access-Control-Allow-Origin' => '*'
         ]);
           return [
               'elementType' => 'Entry',
-              'criteria' => ['section' => 'events'],
+              'elementsPerPage' => 4,
+              'pageParam' => 'pg',
+              'criteria' => [
+                'section' => 'events',
+                'order' => ''.$orderParam.' '.$order.'',
+                //'category' => $categories,
+                'eventCity' => $cities,
+              ],
               'transformer' => function(EntryModel $entry) {
                   return [
                       'id' => $entry->id,
                       'title' => $entry->title,
                       'eventName' => $entry->eventName,
                       'eventDescription' => (string) $entry->eventDescription,
-                      'eventLocation' => $entry->eventLocation,
+                      'eventAddress' => $entry->eventAddress,
                       'eventTime' => $entry->eventTime,
                       'dateCreated' => $entry->dateCreated,
                       'uri' => $entry->uri,

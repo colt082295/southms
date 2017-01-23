@@ -57,16 +57,7 @@ class Header extends React.Component {
         >
           Events
         </Menu.Item>
-
-        <Menu.Menu position='right'>
-          <div className='ui right aligned category search item'>
-            <div className='ui transparent icon input'>
-              <input className={s.search} type='text' placeholder='Search...' />
-              <i className='search link icon' />
-            </div>
-            <div className='results'></div>
-          </div>
-        </Menu.Menu>
+        
       </Menu>
     )
   }

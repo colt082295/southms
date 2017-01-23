@@ -9,7 +9,5 @@
 }
 
 .jobs {
-  flex-basis: 85%;
   position: relative;
-  padding: 0 1.5em;
 }

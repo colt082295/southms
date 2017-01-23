@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import Render from '../../components/Events/Render';
-import BasicFilter from '../../components/Events/BasicFilter';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Events.css';
 
@@ -38,7 +37,6 @@ class Events extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <BasicFilter />
           <Render loading={this.state.loading} events={this.props.events} eventInfo={this.props.eventInfo} />
         </div>
       </div>

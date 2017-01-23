@@ -40,6 +40,7 @@ class JobsLoaded extends React.Component {
                       <p><i className="fa fa-briefcase" aria-hidden="true"></i>{job.type.label}</p>
                       <p><i className="fa fa-tag" aria-hidden="true"></i>{job.category.label}</p>
                       <p><i className="fa fa-money" aria-hidden="true"></i>{job.salary}</p>
+                      <p><i className="fa fa-map-marker" aria-hidden="true"></i>{job.city.label}</p>
                       <p><i className="fa fa-calendar" aria-hidden="true"></i>{job.time}</p>
                     </div>
                     <div className={s.description}>
