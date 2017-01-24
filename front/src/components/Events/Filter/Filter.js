@@ -101,6 +101,22 @@ class Filter extends React.Component {
           _this.props.onLoadChange({loading: false});
         })
   }
+  searchChanged(event, data) {
+    const _this = this;
+    console.log("Search changed", event.target, data.value);
+    _this.props.onLoadChange({loading: true});
+    var val = data.value;
+    this.props.updateSearch(val);
+    console.log("Value is:", val);
+    this.serverRequest =
+      axios
+      // I have to figure out some way to get the value from the other
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + "&city=" + this.props.data.city + "&category=" + this.props.data.category + "&term=" + val)
+        .then(function(result) {
+          _this.props.changeEvents(result.data)
+          _this.props.onLoadChange({loading: false});
+        })
+  }
 
   render() {
 
@@ -120,7 +136,7 @@ class Filter extends React.Component {
           <Dropdown placeholder='Choose Categories' multiple search selection scrolling options={this.state.categories} onChange={this.cateogryChanged.bind(this)} />
         </div>
         <div className={s.right}>
-          <Input type='text' placeholder='Search...' action>
+          <Input type='text' placeholder='Search...' action onChange={this.searchChanged.bind(this)}>
             <input />
             <Select options={options} defaultValue='dateCreated' onChange={this.orderParamChanged.bind(this)} />
             <Select options={options2} defaultValue='asc' onChange={this.orderChanged.bind(this)} />

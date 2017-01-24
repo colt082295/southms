@@ -115,6 +115,7 @@ return [
           $jobType = craft()->request->getQuery('type');
           $category = craft()->request->getQuery('category');
           $city = craft()->request->getQuery('city');
+          $term = craft()->request->getQuery('term');
 
           if(empty($jobType)) {
             $jobTypes = [];
@@ -140,7 +141,7 @@ return [
 
             return [
                 'elementType' => 'Entry',
-                'elementsPerPage' => 4,
+                'elementsPerPage' => 2,
                 'pageParam' => 'pg',
                 'criteria' => [
                   'section' => 'jobs',
@@ -148,6 +149,7 @@ return [
                   'jobType' => $jobTypes,
                   'category' => $categories,
                   'jobCity' => $cities,
+                  'search' => (craft()->request->getParam('term')) ? 'position:'.craft()->request->getParam('term') : ''
                 ],
                 'transformer' => function(EntryModel $entry) {
                     return [
@@ -183,6 +185,7 @@ return [
                         'description' => (string) $entry->description,
                         'type' => $entry->jobType,
                         'category' => $entry->category,
+                        'city' => $entry->jobCity,
                         'salary' => $entry->salary,
                         'dateCreated' => $entry->dateCreated,
                         'uri' => $entry->uri,
@@ -197,6 +200,7 @@ return [
         $order = craft()->request->getQuery('order');
         $category = craft()->request->getQuery('category');
         $city = craft()->request->getQuery('city');
+        $term = craft()->request->getQuery('term');
 
         if(empty($category)) {
           $categories = [];
@@ -224,6 +228,7 @@ return [
                 'order' => ''.$orderParam.' '.$order.'',
                 //'category' => $categories,
                 'eventCity' => $cities,
+                'search' => $term
               ],
               'transformer' => function(EntryModel $entry) {
                   return [
@@ -266,16 +271,33 @@ return [
           ];
       },
         'api/search.json' => function() {
+          HeaderHelper::setHeader([
+              'Access-Control-Allow-Origin' => '*'
+          ]);
+
+          $term = craft()->request->getQuery('term');
+          $section = craft()->request->getQuery('section');
+
             return [
                 'elementType' => 'Entry',
                 'criteria' => [
-                    'search' => (craft()->request->getParam('search')) ? craft()->request->getParam('search') : ''
+                    'section' => $section,
+                    'search' => $term
                 ],
-                'first' => true,
                 'transformer' => function(EntryModel $entry) {
                     return [
-                        'title' => $entry->title,
-                        'url' => $entry->url,
+                      'id' => $entry->id,
+                      'position' => $entry->position,
+                      'description' => (string) $entry->description,
+                      'salary' => $entry->salary,
+                      'category' => $entry->category,
+                      'city' => $entry->jobCity,
+                      'address' => $entry->jobAddress,
+                      'dateCreated' => $entry->dateCreated,
+                      'type' => $entry->jobType,
+                      'uri' => $entry->uri,
+                      'url' => $entry->url,
+                      'jsonUrl' => UrlHelper::getUrl("{$section}/{$entry->id}.json")
                     ];
                 },
             ];

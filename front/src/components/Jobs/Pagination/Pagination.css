@@ -6,3 +6,31 @@
   width: 100%;
   margin-top: 3em;
 }
+
+
+:global(.pagination) {
+  list-style-type: none;
+  display: inline-block;
+  background: silver;
+  border-radius: 3px;
+  padding: 0;
+
+  & :global(li) {
+    display: inline-block;
+
+    &:global(:not(:last-child)) {
+      border-right: 1px solid grey;
+    }
+
+    &:global(.active) {
+      background: rgba(0, 168, 232, 0.63);
+    }
+  }
+
+  & :global(a) {
+    cursor: pointer;
+    color: white;
+    padding: 1em;
+    display: block;
+  }
+}

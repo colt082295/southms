@@ -53,6 +53,7 @@
   background: rgba(251, 251, 251, 0.57);
   border-bottom: 1px solid silver;
   text-align: right;
+  color: #676767;
 
   & p {
     display: inline-block;
@@ -74,4 +75,11 @@
   width: 100%;
   background-size: cover !important;
   background-position: center center !important;
+}
+
+.ad {
+  height: 9em;
+  border: 1px solid silver;
+  text-align: center;
+  width: 100%;
 }

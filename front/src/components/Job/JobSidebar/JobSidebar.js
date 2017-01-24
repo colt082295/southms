@@ -12,25 +12,22 @@ class JobSidebar extends React.Component {
     const time = Moment(data.dateCreated.date).format("MMMM Do, h A");
 
     return (
-      <div className={s.sidebar}>
+      <div className={'sidebar'}>
         <Menu vertical>
-          <Menu.Item name='category' onClick={this.handleItemClick}>
-            Category: <a href="#">{data.category.label}</a>
+          <Menu.Item name='jobs' onClick={this.handleItemClick}>
+            <a href="#">More jobs in {data.category.label}</a>
           </Menu.Item>
 
-          <Menu.Item name='salary' onClick={this.handleItemClick}>
-            Salary: {salary}
+          <Menu.Item name='events' onClick={this.handleItemClick}>
+            <a href="#">Events around {data.city.label}</a>
           </Menu.Item>
 
-          <Menu.Item name='type' onClick={this.handleItemClick}>
-            Type: {data.type.label}
-          </Menu.Item>
-
-          <Menu.Item name='added' onClick={this.handleItemClick}>
-            Posted: {time}
+          <Menu.Item className={s.post} name='post' onClick={this.handleItemClick}>
+            <a href="#">Post a job</a>
           </Menu.Item>
 
       </Menu>
+      <div className={s.ad}>Ad</div>
       </div>
     );
   }

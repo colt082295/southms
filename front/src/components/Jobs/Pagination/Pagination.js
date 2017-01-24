@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Menu } from 'semantic-ui-react';
+import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Pagination.css';
@@ -16,15 +17,33 @@ class Pagination extends React.Component {
   */
 
   state = {
-    activeItem: '1',
-    moreThanOne: false,
+    data: [],
+    offset: 0,
+    pageCount: this.props.pagination.total_pages,
    }
 
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name })
-  }
+  handlePageClick = (data) => {
+    var _this = this;
+    _this.props.onLoadChange({loading: true});
+    let selected = data.selected+1;
+    console.log("Page click:", selected, data);
+
+    this.serverRequest =
+      axios
+      // I have to figure out some way to get the value from the other
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + '&type=' + this.props.data.type + "&city=" + this.props.data.city + "&term=" + this.props.data.search + "&category=" + this.props.data.category + "&pg=" + selected)
+        .then(function(result) {
+          console.log(result.data.meta.pagination.total_pages);
+          _this.setState({pageCount: result.data.meta.pagination.total_pages});
+          _this.props.changeJobs(result.data);
+          _this.props.onLoadChange({loading: false});
+
+        })
+  };
 
   render() {
+    var _this = this;
+    /*
     const { activeItem } = this.state;
     var pages = [];
     var multiple;
@@ -37,14 +56,31 @@ class Pagination extends React.Component {
         pages.push(<Menu.Item name={string} active={activeItem === string} onClick={this.handleItemClick} key={i} />)
       }
     }
+    */
+    let paginate = '';
+    if(this.props.pagination.total_pages > 1) {
+      paginate = <ReactPaginate previousLabel={"previous"}
+                     nextLabel={"next"}
+                     breakLabel={<a href="">...</a>}
+                     breakClassName={"break-me"}
+                     pageCount={this.state.pageCount}
+                     marginPagesDisplayed={2}
+                     pageRangeDisplayed={5}
+                     onPageChange={this.handlePageClick}
+                     containerClassName={"pagination"}
+                     subContainerClassName={"pages pagination"}
+                     activeClassName={"active"} />
 
-
+    }
 
     return (
       <div className={s.paginationWrapper}>
+        {paginate}
+        {/*
         <Menu pagination className={s.pagination} >
         { multiple ?  pages : '' }
         </Menu>
+        */}
 
           {/*
           <Menu.Item name='1' active={activeItem === '1'} onClick={this.handleItemClick} />

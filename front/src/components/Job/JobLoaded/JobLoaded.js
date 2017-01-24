@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Button, Modal, Header, Image, Form, Input, TextArea } from 'semantic-ui-react';
+import Numeral from 'numeral';
+import Moment from 'moment';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './JobLoaded.css';
 
@@ -35,17 +37,27 @@ class JobLoaded extends React.Component {
   render() {
     const data = this.props.job;
 
+    data.salary = Numeral(data.salary).format('$0,0[.]00');
+    data.time = Moment(data.dateCreated.date).format("M/D - ha");
+
     return (
       <div className={s.root}>
         <div className={s.container}>
                 <div className={s.job}>
                   <div className={s.jobPosition}>
                     <h3>{data.position}</h3>
+                    <div className={s.jobMeta}>
+                      <p><i className="fa fa-briefcase" aria-hidden="true"></i>{data.type.label}</p>
+                      <p><i className="fa fa-tag" aria-hidden="true"></i>{data.category.label}</p>
+                      <p><i className="fa fa-money" aria-hidden="true"></i>{data.salary}</p>
+                      <p><i className="fa fa-map-marker" aria-hidden="true"></i>{data.city.label}</p>
+                      <p><i className="fa fa-calendar" aria-hidden="true"></i>{data.time}</p>
+                    </div>
                   </div>
                   <div className={s.description} dangerouslySetInnerHTML={{ __html: data.description }}>
                   </div>
 
-                    <Modal dimmer={"blurring"} closeIcon='close' trigger={<Button className={s.apply} positive fluid>Apply</Button>}>
+                    <Modal dimmer={"blurring"} closeIcon='close' trigger={<Button className={s.apply} color='blue' fluid>Contact Poster</Button>}>
                       <Modal.Header>Applying to {data.position}</Modal.Header>
                       <Modal.Content image>
                         <Modal.Description>

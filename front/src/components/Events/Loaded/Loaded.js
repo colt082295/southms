@@ -44,7 +44,8 @@ class Loaded extends React.Component {
                 </a>
             );
           })}
-          <Pagination />
+          <Pagination pagination={this.props.pagination} data={this.props.data} onLoadChange={this.props.onLoadChange} changeJobs={this.props.changeEvents} />
+          <div className={s.ad}>Ad</div>
         </div>
       </div>
     );

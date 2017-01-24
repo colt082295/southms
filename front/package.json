@@ -40,10 +40,12 @@
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-paginate": "^4.1.1",
+    "react-truncate": "^2.0.4",
     "semantic-ui-react": "^0.63.5",
     "sequelize": "^3.28.0",
     "source-map-support": "^0.4.6",
     "sqlite3": "^3.1.8",
+    "striptags": "^2.2.1",
     "universal-router": "^2.0.0",
     "whatwg-fetch": "^2.0.1"
   },

@@ -37,7 +37,7 @@ class Events extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <Render loading={this.state.loading} events={this.props.events} eventInfo={this.props.eventInfo} />
+          <Render loading={this.state.loading} events={this.props.events} eventInfo={this.props.eventInfo} pagination={this.props.events.meta.pagination} />
         </div>
       </div>
     );

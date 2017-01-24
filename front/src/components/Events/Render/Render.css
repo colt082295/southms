@@ -6,9 +6,12 @@
 
 .container {
   display: flex;
+  padding: 1em 0;
 }
 
 .jobs {
   position: relative;
-  padding: 0 1.5em;
+  margin: 0 auto;
+  padding: 0 0 40px;
+  width: 95%;
 }

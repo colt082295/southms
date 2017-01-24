@@ -26,7 +26,7 @@ class JobsFilter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + data.value + '&type=' + this.props.data.type + "&category=" + this.props.data.category + "&city=" + this.props.data.city)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + data.value + '&type=' + this.props.data.type + "&category=" + this.props.data.category + "&term=" + this.props.data.search + "&city=" + this.props.data.city)
         .then(function(result) {
           _this.props.changeJobs(result.data)
           _this.props.onLoadChange({loading: false});
@@ -44,7 +44,7 @@ class JobsFilter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + data.value + '&order=' + this.props.data.order + '&type=' + this.props.data.type + "&category=" + this.props.data.category + "&city=" + this.props.data.city)
+        .get(this.props.data.url + 'orderParam=' + data.value + '&order=' + this.props.data.order + '&type=' + this.props.data.type + "&category=" + this.props.data.category + "&term=" + this.props.data.search + "&city=" + this.props.data.city)
         .then(function(result) {
           _this.props.changeJobs(result.data)
           _this.props.onLoadChange({loading: false});
@@ -98,7 +98,7 @@ class JobsFilter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order  + "&category=" + this.props.data.category + '&type=' + this.props.data.type + "&city=" + val)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order  + "&category=" + this.props.data.category + '&type=' + this.props.data.type + "&term=" + this.props.data.search + "&city=" + val)
         .then(function(result) {
           _this.props.changeJobs(result.data)
           _this.props.onLoadChange({loading: false});
@@ -129,7 +129,7 @@ class JobsFilter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order  + "&category=" + this.props.data.category + "&city=" + this.props.data.city + '&type=' + val)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order  + "&category=" + this.props.data.category + "&city=" + this.props.data.city + "&term=" + this.props.data.search + '&type=' + val)
         .then(function(result) {
           _this.props.changeJobs(result.data)
           _this.props.onLoadChange({loading: false});
@@ -141,27 +141,30 @@ class JobsFilter extends React.Component {
     console.log("Job Category changed", event.target, data.value);
     _this.props.onLoadChange({loading: true});
     var val = data.value;
-    /*
-    var val = this.props.data.category;
-    if(data.checked) {
-      val.push(data.value);
-    } else {
-      // I'm sure there's a better way
-        for(var i = val.length - 1; i >= 0; i--) {
-            if(val[i] === data.value) {
-               val.splice(i, 1);
-            }
-        }
-        console.log("Array now:", val);
-    }
-    */
     this.props.updateJobCategory(val);
     val = val.join();
     console.log("Value is:", val);
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + '&type=' + this.props.data.type + "&city=" + this.props.data.city + "&category=" + val)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + '&type=' + this.props.data.type + "&city=" + this.props.data.city + "&term=" + this.props.data.search + "&category=" + val)
+        .then(function(result) {
+          _this.props.changeJobs(result.data)
+          _this.props.onLoadChange({loading: false});
+        })
+  }
+
+  searchChanged(event, data) {
+    const _this = this;
+    console.log("Search changed", event.target, data.value);
+    _this.props.onLoadChange({loading: true});
+    var val = data.value;
+    this.props.updateJobSearch(val);
+    console.log("Value is:", val);
+    this.serverRequest =
+      axios
+      // I have to figure out some way to get the value from the other
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + '&type=' + this.props.data.type + "&city=" + this.props.data.city + "&category=" + this.props.data.category + "&term=" + val)
         .then(function(result) {
           _this.props.changeJobs(result.data)
           _this.props.onLoadChange({loading: false});
@@ -184,11 +187,11 @@ class JobsFilter extends React.Component {
       <div className={s.container}>
         <div className={s.left}>
           <Dropdown placeholder='Choose Categories' multiple search selection scrolling options={this.state.categories} onChange={this.jobCateogryChanged.bind(this)} />
-          <Dropdown placeholder='Choose Type' multiple search selection scrolling options={this.state.types} onChange={this.jobTypeChanged.bind(this)} />
-          <Dropdown placeholder='Choose Location' multiple search selection scrolling options={this.state.locations} onChange={this.jobLocationChanged.bind(this)} />
+          <Dropdown placeholder='Choose Types' multiple search selection scrolling options={this.state.types} onChange={this.jobTypeChanged.bind(this)} />
+          <Dropdown placeholder='Choose Locations' multiple search selection scrolling options={this.state.locations} onChange={this.jobLocationChanged.bind(this)} />
         </div>
         <div className={s.right}>
-          <Input type='text' placeholder='Search...' action>
+          <Input type='text' placeholder='Search...' action onChange={this.searchChanged.bind(this)}>
             <input />
             <Select options={options} defaultValue='dateCreated' onChange={this.orderParamChanged.bind(this)} />
             <Select options={options2} defaultValue='asc' onChange={this.orderChanged.bind(this)} />
