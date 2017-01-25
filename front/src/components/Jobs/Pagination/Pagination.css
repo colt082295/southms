@@ -11,9 +11,10 @@
 :global(.pagination) {
   list-style-type: none;
   display: inline-block;
-  background: silver;
+  background: #d9d9d9;
   border-radius: 3px;
   padding: 0;
+  border: 1px solid #a2a2a2;
 
   & :global(li) {
     display: inline-block;
@@ -23,14 +24,18 @@
     }
 
     &:global(.active) {
-      background: rgba(0, 168, 232, 0.63);
+      background: rgb(61, 136, 229);
+
+      & :global(a) {
+        color: white !important;
+      }
     }
   }
 
   & :global(a) {
     cursor: pointer;
-    color: white;
-    padding: 1em;
+    color: black;
+    padding: 1em 1.5em;
     display: block;
   }
 }

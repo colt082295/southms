@@ -6,7 +6,7 @@
  * All of your system's general configuration settings go in here.
  * You can see a list of the default settings in craft/app/etc/config/defaults/general.php
  */
-// Ensure our urls have the right scheme. 
+// Ensure our urls have the right scheme.
 // When ProxyPassing we depend on the X-Forwarded-Proto
 // header beeing set. If it is, we 'activate' https for this app
 if(isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https'){
@@ -45,7 +45,8 @@ return array(
             'basePath' => BASEPATH,
             'siteUrl'  => SITE_URL
         ),
-        'allowAutoUpdates' => false
+        'allowAutoUpdates' => false,
+        'maxUploadFileSize' => 104857600
     ),
     // ------------------------------------------------------------
     // Environment: Staging
@@ -55,7 +56,8 @@ return array(
             'basePath' => BASEPATH,
             'siteUrl'  => SITE_URL
         ),
-        'allowAutoUpdates' => false
+        'allowAutoUpdates' => false,
+        'maxUploadFileSize' => 104857600
     ),
     // ------------------------------------------------------------
     // Environment: Development
@@ -85,10 +87,10 @@ return array(
         'userSessionDuration'           => 'P101Y',
         'rememberedUserSessionDuration' => 'P101Y',
         'rememberUsernameDuration'      => 'P101Y',
+        'maxUploadFileSize' => 104857600,
         // Chrome spoofs the UA string when emulating devices, so to make sure
         // we're not logged out of admin area whenever viewing the site
         // in a tab with emulation activated
         'requireMatchingUserAgentForSession' => false
     )
 );
-

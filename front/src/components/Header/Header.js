@@ -24,13 +24,8 @@ class Header extends React.Component {
     const { activeItem } = this.state
 
     return (
-      <Menu className={s.header}>
-        <Menu.Item href="/" className={s.logo} header>SouthMS</Menu.Item>
-
-        <div className={s.lineContainer}>
-        <div className={s.line}></div>
-        </div>
-
+      <Menu className={s.header + ' nav'}>
+        <a href="/" className={s.logo} >SouthMS</a>
         <Menu.Item
           name='home'
           active={activeItem === 'home'}
@@ -57,7 +52,16 @@ class Header extends React.Component {
         >
           Events
         </Menu.Item>
-        
+
+        <Menu.Item
+          name='cities'
+          active={activeItem === 'cities'}
+          onClick={this.handleItemClick}
+          href="/cities"
+        >
+          Cities
+        </Menu.Item>
+
       </Menu>
     )
   }

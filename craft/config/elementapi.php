@@ -15,7 +15,7 @@ return [
                 ];
             },
         ],
-        'api/cities.json' => function() {
+        'api/locations.json' => function() {
           HeaderHelper::setHeader([
               'Access-Control-Allow-Origin' => '*'
           ]);
@@ -33,11 +33,45 @@ return [
                         'Biloxi',
                         'D\'Iberville',
                         'Gulfport'
-                        ]), JSON_FORCE_OBJECT),
+                        ])),
+                        json_encode(array(county => "Another", 'cities' => [
+                          'Ocean Springs',
+                          'St. Martin',
+                          'Gulfport',
+                          'Biloxi',
+                          'D\'Iberville',
+                          'Gulfport'
+                          ])),
                     ]
                   ];
                 }
               ];
+            },
+            'api/city/<entryId:\d+>.json' => function($entryId) {
+              HeaderHelper::setHeader([
+                  'Access-Control-Allow-Origin' => '*'
+              ]);
+                return [
+                    'elementType' => 'Entry',
+                    'criteria' => ['id' => $entryId],
+                    'first' => true,
+                    'transformer' => function(EntryModel $entry) {
+                        return [
+                            'relatedTo' => ['position' => $position],
+                            'id' => $entry->id,
+                            'position' => $entry->position,
+                            'description' => (string) $entry->description,
+                            'type' => $entry->jobType,
+                            'category' => $entry->category,
+                            'city' => $entry->jobCity,
+                            'salary' => $entry->salary,
+                            'dateCreated' => $entry->dateCreated,
+                            'uri' => $entry->uri,
+                            'url' => $entry->url,
+                            'body' => $entry->body,
+                        ];
+                    },
+                ];
             },
         'api/job-info.json' => function() {
           HeaderHelper::setHeader([
@@ -149,7 +183,7 @@ return [
                   'jobType' => $jobTypes,
                   'category' => $categories,
                   'jobCity' => $cities,
-                  'search' => (craft()->request->getParam('term')) ? 'position:'.craft()->request->getParam('term') : ''
+                  'search' => ($term) ? 'position:*'.$term.'*' : ''
                 ],
                 'transformer' => function(EntryModel $entry) {
                     return [
@@ -228,7 +262,7 @@ return [
                 'order' => ''.$orderParam.' '.$order.'',
                 //'category' => $categories,
                 'eventCity' => $cities,
-                'search' => $term
+                'search' => ($term) ? 'eventName:*'.$term.'*' : ''
               ],
               'transformer' => function(EntryModel $entry) {
                   return [
@@ -260,7 +294,8 @@ return [
                     'title' => $entry->title,
                     'eventName' => $entry->eventName,
                     'eventDescription' => (string) $entry->eventDescription,
-                    'eventLocation' => $entry->eventLocation,
+                    'eventCity' => $entry->eventCity,
+                    'eventAddress' => $entry->eventAddress,
                     'eventTime' => $entry->eventTime,
                     'dateCreated' => $entry->dateCreated,
                     'uri' => $entry->uri,

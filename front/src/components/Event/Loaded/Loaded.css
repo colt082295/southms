@@ -21,6 +21,7 @@
   padding: .7em;
   border-bottom: 1px solid silver;
   background: rgba(189, 189, 189, 0.08);
+  display: flex;
 
   & h1,
   h2,
@@ -33,6 +34,9 @@
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
     transform: translate3d( 0, 0, 0);
+    float: left;
+    margin: 0;
+    max-width: 17em;
   }
 }
 
@@ -60,4 +64,23 @@
   width: 100%;
   background-size: cover !important;
   background-position: center center !important;
+}
+
+.meta {
+  text-align: right;
+  display: inline-block;
+  flex: 1;
+  font-weight: 600;
+  color: #575757;
+  letter-spacing: .03rem;
+
+  & p {
+    display: inline-block;
+    padding: .5% 2%;
+    margin: 0;
+
+    & i {
+      margin-right: .5em;
+    }
+  }
 }

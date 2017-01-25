@@ -27,7 +27,8 @@ class JobsLoaded extends React.Component {
 
 
             return (
-                <a href={"/job/" + job.id} className={s.job} key={job.id}>
+              <div className={s.jobContainer} key={job.id}>
+                <a href={"/job/" + job.id} className={s.job}>
                     <div className={s.jobPosition}>
                       <h3>{job.position}</h3>
                       <div className={s.jobMeta}>
@@ -43,6 +44,7 @@ class JobsLoaded extends React.Component {
                       <div className={s.viewFull}><Button basic color='blue'>View Job</Button></div>
                     </div>
                 </a>
+              </div>
             );
           })}
           <Pagination pagination={this.props.pagination} data={this.props.data} onLoadChange={this.props.onLoadChange} changeJobs={this.props.changeJobs} />

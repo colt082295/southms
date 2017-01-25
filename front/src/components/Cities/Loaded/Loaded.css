@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 0 auto;
+  padding: 0 1.5em;
+  width: 95%;
+}
+
+.county {
+  padding: 1.5em 3em;
+
+  &:not(:last-child) {
+    & .cities {
+      border-right: 1px solid silver;
+    }
+  }
+}
+
+.cities {
+  padding: 0 2em 0 0;
+}
+
+.city {
+  padding: .5em;
+}

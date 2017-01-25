@@ -1,6 +1,6 @@
 {
-  "name": "JobsLoading",
+  "name": "Loading",
   "version": "0.0.0",
   "private": true,
-  "main": "./JobsLoading.js"
+  "main": "./Loading.js"
 }

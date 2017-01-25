@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Grid, Image } from 'semantic-ui-react';
 import Pagination from '../Pagination';
 import Numeral from 'numeral';
 import Moment from 'moment';
@@ -27,7 +28,8 @@ class Loaded extends React.Component {
 
 
             return (
-                <a href={"/event/" + event.id} className={s.job} key={event.id}>
+              <div className={s.jobContainer} key={event.id}>
+                <a href={"/event/" + event.id} className={s.job}>
                     <div className={s.jobPosition}>
                       <h3>{event.eventName}</h3>
                     </div>
@@ -42,6 +44,8 @@ class Loaded extends React.Component {
                       <div dangerouslySetInnerHTML={{ __html: event.eventDescription }}></div>
                     </div>
                 </a>
+              </div>
+
             );
           })}
           <Pagination pagination={this.props.pagination} data={this.props.data} onLoadChange={this.props.onLoadChange} changeJobs={this.props.changeEvents} />

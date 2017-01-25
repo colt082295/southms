@@ -1,21 +1,13 @@
 import React, { PropTypes } from 'react';
 import { Button, Modal, Header, Image, Form, Input, TextArea } from 'semantic-ui-react';
+import Moment from 'moment';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Loaded.css';
 
 class Loaded extends React.Component {
-  /*
-  static propTypes = {
-    news: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-      contentSnippet: PropTypes.string,
-    })).isRequired,
-  };
-  */
-
   render() {
     const data = this.props.event;
+    const time = Moment(data.eventTime.date).format("h:mm A [on] MMMM Do");
 
     return (
       <div className={s.root}>
@@ -23,6 +15,9 @@ class Loaded extends React.Component {
                 <div className={s.job}>
                   <div className={s.jobPosition}>
                     <h3>{data.eventName}</h3>
+                    <div className={s.meta}>
+                      <p>At {time} in {data.eventCity.label}</p>
+                    </div>
                   </div>
                   <div className={s.image}>
                     <div className={s.imageBackground} style={{background: 'url("https://upload.wikimedia.org/wikipedia/commons/1/1c/BiloxiLightHouseandVisitorsCenter.jpg")'}} >
