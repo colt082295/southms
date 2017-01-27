@@ -14,7 +14,7 @@ class Render extends React.Component {
     search: '',
     order: 'asc',
     orderParam: 'dateCreated',
-    url: 'http://192.168.0.25/test-craft2/craft/app/index.php/api/events.json?',
+    url: 'http://www.southms.com/index.php/api/events.json?',
     location: [],
     loading: false,
   }

@@ -25,8 +25,8 @@ class RenderJobs extends React.Component {
     search: '',
     order: 'asc',
     orderParam: 'dateCreated',
-    url: 'http://192.168.0.25/test-craft2/craft/app/index.php/api/jobs.json?',
-    urlSearch: 'http://192.168.0.25/test-craft2/craft/app/index.php/api/search.json?',
+    url: 'http://www.southms.com/index.php/api/jobs.json?',
+    urlSearch: 'http://www.southms.com/index.php/api/search.json?',
     location: [],
     loading: false,
   }

@@ -13,7 +13,7 @@ export default {
   async action({ params, path, uri }) {
     // const route = await next();
     //console.log("Running fetch!", params, path, uri);
-    const resp = await fetch('http://192.168.0.25/test-craft2/craft/app/index.php/api/events/' + params.id + '.json');
+    const resp = await fetch('http://www.southms.com/index.php/api/events/' + params.id + '.json');
     const data = await resp.json();
     //console.log("Got fetch!", data);
     return data && {

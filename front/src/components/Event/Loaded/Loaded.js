@@ -16,7 +16,7 @@ class Loaded extends React.Component {
                   <div className={s.jobPosition}>
                     <h3>{data.eventName}</h3>
                     <div className={s.meta}>
-                      <p>At {time} in {data.eventCity.label}</p>
+                      <p>At {time} in {data.eventCity}</p>
                     </div>
                   </div>
                   <div className={s.image}>

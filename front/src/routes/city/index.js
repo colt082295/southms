@@ -11,7 +11,7 @@ export default {
     // const route = await next();
     //console.log("Running fetch!", params, path, uri);
     const title = "city page";
-    const resp = await fetch('http://192.168.0.25/test-craft2/craft/app/index.php/api/jobs/' + 4 + '.json');
+    const resp = await fetch('http://www.southms.com/index.php/api/jobs/' + 4 + '.json');
     const data = await resp.json();
     //console.log("Got fetch!", data);
     return data && {

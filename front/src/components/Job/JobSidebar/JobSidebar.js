@@ -15,11 +15,11 @@ class JobSidebar extends React.Component {
       <div className={'sidebar'}>
         <Menu vertical>
           <Menu.Item name='jobs' onClick={this.handleItemClick}>
-            <a href="#">More jobs in {data.category.label}</a>
+            <a href="#">More jobs in {data.category}</a>
           </Menu.Item>
 
           <Menu.Item name='events' onClick={this.handleItemClick}>
-            <a href="#">Events around {data.city.label}</a>
+            <a href="#">Events around {data.city}</a>
           </Menu.Item>
 
           <Menu.Item className={s.post} name='post' onClick={this.handleItemClick}>

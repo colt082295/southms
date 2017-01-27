@@ -8,7 +8,7 @@ class Render extends React.Component {
 
   state = {
     locations: this.props.locations,
-    url: 'http://192.168.0.25/test-craft2/craft/app/index.php/api/cities.json?',
+    url: 'http://www.southms.com/index.php/api/cities.json?',
     loading: false,
   }
 

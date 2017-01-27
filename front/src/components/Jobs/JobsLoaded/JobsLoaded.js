@@ -32,10 +32,10 @@ class JobsLoaded extends React.Component {
                     <div className={s.jobPosition}>
                       <h3>{job.position}</h3>
                       <div className={s.jobMeta}>
-                        <p><i className="fa fa-briefcase" aria-hidden="true"></i>{job.type.label}</p>
-                        <p><i className="fa fa-tag" aria-hidden="true"></i>{job.category.label}</p>
+                        <p><i className="fa fa-briefcase" aria-hidden="true"></i>{job.type}</p>
+                        <p><i className="fa fa-tag" aria-hidden="true"></i>{job.category}</p>
                         <p><i className="fa fa-money" aria-hidden="true"></i>{job.salary}</p>
-                        <p><i className="fa fa-map-marker" aria-hidden="true"></i>{job.city.label}</p>
+                        <p><i className="fa fa-map-marker" aria-hidden="true"></i>{job.city}</p>
                         <p><i className="fa fa-calendar" aria-hidden="true"></i>{job.time}</p>
                       </div>
                     </div>

@@ -10,10 +10,9 @@
 .jobContainer {
   margin: 1%;
   margin-bottom: 1.5em;
-  width: 48% !important;
+  flex-basis: 48%;
   padding: 0 !important;
   min-width: 35em;
-  flex: 1;
 }
 
 .job {
