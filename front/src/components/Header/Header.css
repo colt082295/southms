@@ -88,6 +88,7 @@
   float: left;
   margin: 0 2em 0 0;
   width: 10em;
+  height: 110%;
   position: relative;
   z-index: 2;
   color: black;
@@ -106,9 +107,10 @@
     transform: skewX(-30deg) skewY(0);
     content: ' ';
     display: block;
-    height: 56px;
+    height: 100%;
     position: absolute;
     top: 0;
+    box-shadow: -4px 3px 6px 0px grey;
   }
 
   &::after {
@@ -118,7 +120,7 @@
     transform: skewX(-30deg) skewY(0);
     content: '\20';
     display: block;
-    height: 56px;
+    height: 100%;
     position: absolute;
     top: 0;
   }

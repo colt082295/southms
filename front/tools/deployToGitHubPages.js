@@ -13,7 +13,7 @@ import build from './build';
 
 const remote = {
   name: 'github',
-  url: 'https://github.com/{user}/{repo}.git',
+  url: 'https://github.com/colt082295/SouthMSReact.git',
   branch: 'gh-pages',
 };
 
@@ -34,7 +34,7 @@ async function deployToGitHubPages() {
 
   // Build the project in RELEASE mode which
   // generates optimized and minimized bundles
-  process.argv.push('--static', '--release');
+  process.argv.push('--', '--static', '--release');
   await run(build);
 
   // Push the contents of the build folder to the remote server via Git
