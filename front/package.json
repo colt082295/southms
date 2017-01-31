@@ -40,6 +40,7 @@
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-paginate": "^4.1.1",
+    "react-slick": "^0.14.5",
     "react-truncate": "^2.0.4",
     "semantic-ui-react": "^0.63.5",
     "sequelize": "^3.28.0",

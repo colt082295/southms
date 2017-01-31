@@ -20,7 +20,7 @@
 .jobPosition {
   padding: .7em;
   border-bottom: 1px solid silver;
-  background: rgba(189, 189, 189, 0.08);
+  background: rgba(252, 245, 36, 0.3);
   display: flex;
 
   & h1,
