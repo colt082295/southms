@@ -25,7 +25,7 @@ class Filter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + data.value + "&category=" + this.props.data.category + "&city=" + this.props.data.city)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + data.value + "&city=" + this.props.data.city)
         .then(function(result) {
           _this.props.changeEvents(result.data)
           _this.props.onLoadChange({loading: false});
@@ -43,7 +43,7 @@ class Filter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + data.value + '&order=' + this.props.data.order + "&category=" + this.props.data.category + "&city=" + this.props.data.city)
+        .get(this.props.data.url + 'orderParam=' + data.value + '&order=' + this.props.data.order + "&city=" + this.props.data.city)
         .then(function(result) {
           _this.props.changeEvents(result.data)
           _this.props.onLoadChange({loading: false});
@@ -53,14 +53,7 @@ class Filter extends React.Component {
   componentDidMount() {
     let categories = [];
     let locations = [];
-      this.props.eventInfo.allCategories.forEach(function (item) {
-        categories.push(JSON.parse(item));
-      })
-      this.setState({ categories: categories });
-      this.props.eventInfo.allLocations.forEach(function (item) {
-        locations.push(JSON.parse(item));
-      })
-      this.setState({ locations: locations });
+      this.setState({ locations: this.props.eventInfo.allLocations });
   }
 
   componentWillUnmount() {
@@ -72,30 +65,18 @@ class Filter extends React.Component {
     console.log("Location changed", event.target, data);
     _this.props.onLoadChange({loading: true});
     var val = data.value;
-    this.props.updateLocation(val);
-    val = val.join();
-    this.serverRequest =
-      axios
-      // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order  + "&category=" + this.props.data.category + "&city=" + val)
-        .then(function(result) {
-          _this.props.changeEvents(result.data)
-          _this.props.onLoadChange({loading: false});
-        })
-  }
 
-  cateogryChanged(event, data) {
-    const _this = this;
-    console.log("Category changed", event.target, data.value);
-    _this.props.onLoadChange({loading: true});
-    var val = data.value;
-    this.props.updateCategory(val);
-    val = val.join();
-    console.log("Value is:", val);
+    if(val.length > 0) {
+      this.props.updateLocation(val);
+      val = val.join();
+    } else {
+      this.props.updateLocation('*');
+      val = '*';
+    }
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + "&city=" + this.props.data.city + "&category=" + val)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + "&city=" + val)
         .then(function(result) {
           _this.props.changeEvents(result.data)
           _this.props.onLoadChange({loading: false});
@@ -111,7 +92,7 @@ class Filter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + "&city=" + this.props.data.city + "&category=" + this.props.data.category + "&term=" + val)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + "&city=" + this.props.data.city + "&term=" + val)
         .then(function(result) {
           _this.props.changeEvents(result.data)
           _this.props.onLoadChange({loading: false});
@@ -133,7 +114,6 @@ class Filter extends React.Component {
       <div className={s.container}>
         <div className={s.left}>
           <Dropdown placeholder='Choose Locations' multiple search selection scrolling options={this.state.locations} onChange={this.locationChanged.bind(this)} />
-          <Dropdown placeholder='Choose Categories' multiple search selection scrolling options={this.state.categories} onChange={this.cateogryChanged.bind(this)} />
         </div>
         <div className={s.right}>
           <Input type='text' placeholder='Search...' action onChange={this.searchChanged.bind(this)}>

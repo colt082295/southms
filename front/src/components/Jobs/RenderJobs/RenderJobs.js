@@ -19,9 +19,9 @@ class RenderJobs extends React.Component {
 
   state = {
     jobs: this.props.jobs,
-    type: [],
-    category: [],
-    city: [],
+    type: '*',
+    category: '*',
+    city: '*',
     search: '',
     order: 'asc',
     orderParam: 'dateCreated',

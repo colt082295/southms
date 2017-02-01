@@ -133,6 +133,33 @@
 .titleWrapper {
   text-align: center;
   margin-bottom: 2em;
+
+  & h2 {
+    position: relative;
+    display: inline-block;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 25%;
+      height: 5px;
+      background: #3d88e5;
+      top: 50%;
+      left: -30%;
+      transform: translate(0, -50%);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 25%;
+      height: 5px;
+      background: #3d88e5;
+      top: 50%;
+      right: -30%;
+      transform: translate(0, -50%);
+    }
+  }
 }
 
 .bottom {

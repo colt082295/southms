@@ -55,18 +55,25 @@ class JobsFilter extends React.Component {
     let categories = [];
     let types = [];
     let locations = [];
+    /*
       this.props.jobInfo.allCategories.forEach(function (item) {
         categories.push(JSON.parse(item));
       })
-      this.setState({ categories: categories });
+      */
+      this.setState({ categories: this.props.jobInfo.allCategories });
+      /*
       this.props.jobInfo.allTypes.forEach(function (item) {
         types.push(JSON.parse(item));
       })
-      this.setState({ types: types });
+      */
+      this.setState({ types: this.props.jobInfo.allTypes });
+      /*
       this.props.jobInfo.allLocations.forEach(function (item) {
         locations.push(JSON.parse(item));
       })
-      this.setState({ locations: locations });
+      */
+      this.setState({ locations: this.props.jobInfo.allLocations });
+      console.log(this.props.jobInfo.allCategories,this.props.jobInfo.allTypes,this.props.jobInfo.allLocations)
     //console.log(JSON.parse(this.props.jobInfo.allCategories));
   }
 
@@ -93,8 +100,14 @@ class JobsFilter extends React.Component {
         console.log("Array now:", val);
     }
     */
-    this.props.updateJobLocation(val);
-    val = val.join();
+
+    if(val.length > 0) {
+      this.props.updateJobLocation(val);
+      val = val.join();
+    } else {
+      this.props.updateJobLocation('*');
+      val = '*';
+    }
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
@@ -107,9 +120,10 @@ class JobsFilter extends React.Component {
 
   jobTypeChanged(event, data) {
     const _this = this;
-    console.log("Job Type changed", event.target, data);
+    // console.log("Job Type changed", event.target, data);
     _this.props.onLoadChange({loading: true});
     var val = data.value;
+    console.log("Job type value:", val);
     /*
     var val = this.props.data.type;
     if(data.checked) {
@@ -124,8 +138,13 @@ class JobsFilter extends React.Component {
         console.log("Array now:", val);
     }
     */
-    this.props.updateJobType(val);
-    val = val.join();
+    if(val.length > 0) {
+      this.props.updateJobType(val);
+      val = val.join();
+    } else {
+      this.props.updateJobType('*');
+      val = '*';
+    }
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
@@ -141,9 +160,14 @@ class JobsFilter extends React.Component {
     console.log("Job Category changed", event.target, data.value);
     _this.props.onLoadChange({loading: true});
     var val = data.value;
-    this.props.updateJobCategory(val);
-    val = val.join();
-    console.log("Value is:", val);
+
+    if(val.length > 0) {
+      this.props.updateJobCategory(val);
+      val = val.join();
+    } else {
+      this.props.updateJobCategory('*');
+      val = '*';
+    }
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
@@ -175,7 +199,7 @@ class JobsFilter extends React.Component {
 
      const options = [
        { text: 'Date Added', value: 'dateCreated' },
-       { text: 'Salary', value: 'salary' }
+       { text: 'Salary', value: 'jobSalary' }
      ]
 
      const options2 = [

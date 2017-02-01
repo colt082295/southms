@@ -9,8 +9,8 @@ import s from './Render.css';
 class Render extends React.Component {
   state = {
     events: this.props.events,
-    category: [],
-    city: [],
+    category: '*',
+    city: '*',
     search: '',
     order: 'asc',
     orderParam: 'dateCreated',
