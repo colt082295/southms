@@ -5,9 +5,9 @@ import Pagination from '../../Pagination';
 import Numeral from 'numeral';
 import Moment from 'moment';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './JobsLoaded.css';
+import s from './Loaded.css';
 
-class JobsLoaded extends React.Component {
+class Loaded extends React.Component {
 
   state = {
     jobs: this.props.jobs.data,
@@ -54,4 +54,4 @@ class JobsLoaded extends React.Component {
   }
 }
 
-export default withStyles(s)(JobsLoaded);
+export default withStyles(s)(Loaded);

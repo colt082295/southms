@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import axios from 'axios';
-import RenderJobs from '../../components/Jobs/RenderJobs';
+import RenderJobs from '../../components/Jobs/Render';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Jobs.css';
 
