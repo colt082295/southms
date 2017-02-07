@@ -17,18 +17,22 @@ class RenderJobs extends React.Component {
   };
   */
 
-  state = {
-    jobs: this.props.jobs,
-    type: '*',
-    category: '*',
-    city: '*',
-    search: '',
-    order: 'asc',
-    orderParam: 'dateCreated',
-    url: 'http://www.southms.com/index.php/api/jobs.json?',
-    urlSearch: 'http://www.southms.com/index.php/api/search.json?',
-    location: [],
-    loading: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      jobs: this.props.jobs,
+      type: '*',
+      category: '*',
+      city: '*',
+      search: '',
+      order: 'asc',
+      orderParam: 'dateCreated',
+      url: 'http://www.southms.com/index.php/api/jobs.json?',
+      urlSearch: 'http://www.southms.com/index.php/api/search.json?',
+      urlPagination: this.city,
+      location: [],
+      loading: false,
+    };
   }
 
   componentDidMount() {

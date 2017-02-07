@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Button } from 'semantic-ui-react';
 import striptags from 'striptags';
-import Pagination from '../Pagination';
+import Pagination from '../../Pagination';
 import Numeral from 'numeral';
 import Moment from 'moment';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -47,7 +47,7 @@ class JobsLoaded extends React.Component {
               </div>
             );
           })}
-          <Pagination pagination={this.props.pagination} data={this.props.data} onLoadChange={this.props.onLoadChange} changeJobs={this.props.changeJobs} />
+          <Pagination pagination={this.props.pagination} data={this.props.data} onLoadChange={this.props.onLoadChange} changeData={this.props.changeJobs} />
         </div>
       </div>
     );
