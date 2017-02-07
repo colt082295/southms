@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
-import geolocator from 'geolocator';
-import Loading from '../Loading';
+import Loading from '../../Loading';
 import Loaded from '../Loaded';
 import Filter from '../Filter';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
