@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './Home';
+import Home from './Home'; // Load the parent level Home component
 //import fetch from '../../core/fetch';
 import Layout from '../../components/Layout';
 
@@ -9,7 +9,7 @@ export default {
 
   action() {
     return {
-      component: <Layout><Home /></Layout>,
+      component: <Layout><Home /></Layout>, // Display the homepage
     };
   },
 
