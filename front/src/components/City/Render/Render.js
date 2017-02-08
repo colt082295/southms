@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import Loading from '../Loading';
 import Loaded from '../Loaded';
 import Sidebar from '../Sidebar';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';

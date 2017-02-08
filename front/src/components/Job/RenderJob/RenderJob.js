@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
-import JobLoading from '../JobLoading';
-import JobLoaded from '../JobLoaded';
+import Loaded from '../JobLoaded';
 import JobSidebar from '../JobSidebar';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './RenderJob.css';
@@ -22,7 +21,7 @@ class RenderJob extends React.Component {
       <div className={s.root}>
         <div className={s.container}>
           <div className={s.jobs}>
-            <JobLoaded job={this.props.job} />
+            <Loaded job={this.props.job} />
           </div>
           <JobSidebar job={this.props.job} />
         </div>

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import geolocator from 'geolocator';
 import Loading from '../../Loading';
-import JobsLoaded from '../JobsLoaded';
+import JobsLoaded from '../Loaded';
 import Filter from '../Filter';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Render.css';

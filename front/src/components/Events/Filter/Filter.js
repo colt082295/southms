@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Dropdown, Input, Select } from 'semantic-ui-react';
 import axios from 'axios';
-import Search from '../Search';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Filter.css';
 

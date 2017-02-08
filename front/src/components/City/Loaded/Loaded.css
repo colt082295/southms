@@ -7,10 +7,29 @@
 }
 
 .aboutTitle {
-  border-left: 8px solid #4475ff;
-  padding-left: 1em;
+  font-style: italic;
+}
+
+.city {
+  display: inline-block;
+  padding-bottom: .2em;
+  position: relative;
+
+  &::after {
+    content: '';
+    height: 5px;
+    width: 100%;
+    left: 0;
+    background: #3d88e5;
+    bottom: 0;
+    position: absolute;
+  }
 }
 
 .aboutDescription {
   padding: 1%;
+}
+
+:global(b) {
+  font-weight: 600 !important;
 }

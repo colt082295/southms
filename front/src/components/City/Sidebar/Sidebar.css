@@ -1,3 +1,10 @@
+:global(.sidebar-dropdown) {
+  & :global(.menu) {
+    right: 100% !important;
+  }
+}
+
+/*
 :global(.sidebar) {
   flex-basis: 15%;
 
@@ -36,3 +43,4 @@
   border: 1px solid silver;
   text-align: center;
 }
+*/

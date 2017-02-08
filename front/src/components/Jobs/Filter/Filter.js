@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Dropdown, Input, Select } from 'semantic-ui-react';
-import JobsSearch from '../JobsSearch';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Filter.css';
 

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Loading from '../Loading';
+import Loading from '../../Loading';
 import Loaded from '../Loaded';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Render.css';
