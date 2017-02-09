@@ -10,7 +10,7 @@ class Sidebar extends React.Component {
     super(props);
 
     this.state = {
-      jobs: [],
+      menu: [],
     }
   }
 
@@ -21,11 +21,11 @@ class Sidebar extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get('http://www.southms.com/index.php/api/jobs.json?type=*&category=*&city='+this.props.city.camelCase+'&limit=3')
+        .get('http://www.southms.com/index.php/api/quick-links.json?city='+this.props.city.slug)
         .then(function(result) {
-          console.log("Got data:", result.data);
+          console.log("Got data:", result.data.data[0].menu);
           _this.setState({
-            jobs: result.data.data,
+            menu: result.data.data[0].menu,
           });
         })
   }
@@ -37,66 +37,21 @@ class Sidebar extends React.Component {
     return (
       <div className={'sidebar'}>
         <Menu vertical>
-       <Menu.Item>
-         <Input placeholder='Search...' />
-       </Menu.Item>
 
-       <Menu.Item>
-         Jobs in {this.props.city.title}
+          {this.state.menu.map(function (item, i) {
+            console.log("Menu item:", item);
+            return (<Menu.Item key={i} >{ item.linkable == '1' ?  <a href={item.link}>{item.name}</a> : item.name}
+            { item.subSection  == '1' ? <Menu.Menu>{item.subSectionContent.map(function (sub, i2) {
+               return (<Menu.Item name={sub.subSectionHeading} key={i2} href={sub.subSectionlink} ></Menu.Item>) })}
+             </Menu.Menu> : ''}</Menu.Item>)
 
-         <Menu.Menu>
-           {this.state.jobs.map(function (job, i) { // Map through the cities
-             console.log("job", job);
-             return (<Menu.Item name='search' key={i} href={'/job/'+job.id} >
-               {job.position}
-             </Menu.Item>)
-             })}
-         </Menu.Menu>
-       </Menu.Item>
 
-       <Menu.Item>
-         Events in {this.props.city.title}
+          })}
 
-         <Menu.Menu>
-           <Menu.Item name='search' onClick={this.handleItemClick}>
-             Meeting with Colton
-           </Menu.Item>
-           <Menu.Item name='add' onClick={this.handleItemClick}>
-             Another Event
-           </Menu.Item>
-           <Menu.Item name='about' onClick={this.handleItemClick}>
-             Last Event
-           </Menu.Item>
-         </Menu.Menu>
-       </Menu.Item>
 
-       <Menu.Item>
-         Restaurants in {this.props.city.title}
-
-         <Menu.Menu>
-           <Menu.Item name='search' onClick={this.handleItemClick}>
-             Pizza Hut
-           </Menu.Item>
-           <Menu.Item name='add' onClick={this.handleItemClick}>
-             Woody's Roadside
-           </Menu.Item>
-           <Menu.Item name='about' onClick={this.handleItemClick}>
-             Aunt Jenny's Catfish Restaurant
-           </Menu.Item>
-         </Menu.Menu>
-       </Menu.Item>
-
-       <Dropdown text='More' pointing='right' className={'link item sidebar-dropdown'}>
-      <Dropdown.Menu>
-        <Dropdown.Item>Hotels</Dropdown.Item>
-        <Dropdown.Item>Things to do</Dropdown.Item>
-        <Dropdown.Item>Real Estate</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
 
      </Menu>
-      <div className={s.ad}>Ad</div>
-      </div>
+   </div>
     );
   }
 }

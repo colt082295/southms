@@ -18,7 +18,7 @@ export default {
     // const route = await next();
     //console.log("Running fetch!", params, path, uri);
     const title = "city page";
-    params.id = params.id.toCamelCase();
+    //params.id = params.id.toCamelCase();
     console.log("City slug is:", params.id);
     const resp = await fetch('http://www.southms.com/index.php/api/cities/' + params.id + '.json');
     const data = await resp.json();
