@@ -14,7 +14,6 @@ export default {
     require('./job').default,
     require('./events').default,
     require('./event').default,
-    require('./cities').default,
     require('./city').default,
 
     // Wildcard routes, e.g. { path: '*', ... } (must go last)
