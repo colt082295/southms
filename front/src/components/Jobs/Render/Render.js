@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import geolocator from 'geolocator';
 import Loading from '../../Loading';
 import JobsLoaded from '../Loaded';
-import Sidebar from '../../Sidebar';
+import Sidebar from '../../QuicklinksSidebar';
 import Filter from '../Filter';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Render.css';
@@ -14,7 +14,7 @@ class Render extends React.Component {
     this.state = {
       jobs: this.props.jobs,
       type: '*',
-      category: '*',
+      availability: '*',
       city: '*',
       search: '',
       order: 'asc',
@@ -44,23 +44,23 @@ class Render extends React.Component {
     });
   }
   // Later I'll need to figure out how way to consolidate these functions into as little as possible.
-  updateJobLocation(city) {
+  updateLocation(city) {
     // var newArray = this.state.type.slice();
     // newArray.push(type);
     //this.setState({ type: newArray });
     this.setState({ city: city });
   }
-  updateJobType(type) {
+  updateType(type) {
     // var newArray = this.state.type.slice();
     // newArray.push(type);
     //this.setState({ type: newArray });
     this.setState({ type: type });
   }
-  updateJobCategory(category) {
-    console.log("Category update");
-    this.setState({ category: category });
+  updateAvailability(availability) {
+    console.log("Availability update");
+    this.setState({ availability: availability });
   }
-  updateJobSearch(search) {
+  updateSearch(search) {
     // var newArray = this.state.type.slice();
     // newArray.push(type);
     //this.setState({ type: newArray });
@@ -80,12 +80,12 @@ class Render extends React.Component {
 
     return (
       <div className={s.root}>
-        <Filter onLoadChange={this.onLoadChange.bind(this)} updateJobSearch={this.updateJobSearch.bind(this)} changeJobs={this.changeJobs.bind(this)} changeBasicFilter={this.changeBasicFilter.bind(this)} data={this.state} jobs={this.state.jobs} jobInfo={this.props.jobInfo} location={this.state.location} onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeJobs.bind(this)} data={this.state} updateJobCategory={this.updateJobCategory.bind(this)} updateJobType={this.updateJobType.bind(this)} updateJobLocation={this.updateJobLocation.bind(this)} />
+        <Filter onLoadChange={this.onLoadChange.bind(this)} updateSearch={this.updateSearch.bind(this)} changeJobs={this.changeJobs.bind(this)} changeBasicFilter={this.changeBasicFilter.bind(this)} data={this.state} jobs={this.state.jobs} jobInfo={this.props.jobInfo} location={this.state.location} onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeJobs.bind(this)} data={this.state} updateAvailability={this.updateAvailability.bind(this)} updateType={this.updateType.bind(this)} updateLocation={this.updateLocation.bind(this)} />
         <div className={s.container}>
-          <div className={s.jobs}>
-            {render}
-          </div>
-          <Sidebar city={city} />
+          <main>
+              {render}
+          </main>
+          <Sidebar />
         </div>
       </div>
     );

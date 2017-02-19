@@ -47,7 +47,6 @@ class JobLoaded extends React.Component {
                   <div className={s.jobPosition}>
                     <h3>{data.position}</h3>
                     <div className={s.jobMeta}>
-                      <p><i className="fa fa-briefcase" aria-hidden="true"></i>{data.type}</p>
                       <p><i className="fa fa-tag" aria-hidden="true"></i>{data.category}</p>
                       <p><i className="fa fa-money" aria-hidden="true"></i>{data.salary}</p>
                       <p><i className="fa fa-map-marker" aria-hidden="true"></i>{data.city}</p>

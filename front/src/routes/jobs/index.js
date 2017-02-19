@@ -15,27 +15,31 @@ export default {
     //console.log("Running fetch!", params, path, uri);
     const jobs = await fetch('http://www.southms.com/index.php/api/jobs.json?type=*&category=*&city=*');
     const jobsData = await jobs.json();
-    //const resp2 = await fetch('http://www.southms.com/index.php/api/job-info.json');
-    //const jobInfo = await resp2.json();
-    const jobTypes = await fetch('http://www.southms.com/index.php/api/job-types.json');
-    const jobTypesData = await jobTypes.json();
-    console.log("jobTypes:", jobTypesData.data);
+
+    const jobInfo = await fetch('http://www.southms.com/index.php/api/job-info.json');
+    const jobInfoData = await jobInfo.json();
+
     const jobCities = await fetch('http://www.southms.com/index.php/api/cities.json');
     const jobCitiesData = await jobCities.json();
-    console.log("jobCities:", jobCitiesData.data);
+
+    /*
     const jobCategories = await fetch('http://www.southms.com/index.php/api/job-categories.json');
     const jobCategoriesData = await jobCategories.json();
 
-    const jobInfo = {
-      allCategories: jobCategoriesData.data,
-      allTypes: jobTypesData.data,
-      allLocations: jobCitiesData.data,
+    const jobTypes = await fetch('http://www.southms.com/index.php/api/job-types.json');
+    const jobTypesData = await jobTypes.json();
+    */
+
+    const jobInfoAll = {
+      types: jobInfoData.types,
+      availabilities: jobInfoData.availabilities,
+      locations: jobCitiesData.data,
     };
-    console.log("Job Info:", jobInfo);
+    console.log("Job Info:", jobInfoAll);
     //console.log("Got fetch!", jobs, jobInfo);
-    return jobs && /* jobInfo &&*/{
+    return jobs && jobInfoData && {
       title,
-      component: <Layout><Jobs title={title} jobs={jobsData} jobInfo={jobInfo} /></Layout>,
+      component: <Layout><Jobs title={title} jobs={jobsData} jobInfo={jobInfoAll} /></Layout>,
     };
   },
 };

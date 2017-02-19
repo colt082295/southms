@@ -1,0 +1,17 @@
+:global(.sidebar-dropdown) {
+  & :global(.menu) {
+    right: 100% !important;
+  }
+}
+
+:global(.ui.vertical.menu) {
+  width: 100% !important;
+}
+
+.sidebar {
+  flex-basis: 15%;
+}
+
+:global(main) {
+  flex: 1;
+}

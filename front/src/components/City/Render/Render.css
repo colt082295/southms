@@ -7,7 +7,3 @@
 .container {
   display: flex;
 }
-
-.jobs {
-  flex-basis: 85%;
-}

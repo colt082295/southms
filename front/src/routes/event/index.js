@@ -8,7 +8,7 @@ const title = 'Event';
 
 export default {
 
-  path: '/event/:id',
+  path: '/events/:id',
 
   async action({ params, path, uri }) {
     // const route = await next();

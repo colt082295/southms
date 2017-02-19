@@ -1,0 +1,73 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1% 2%;
+}
+
+.job {
+  display: block;
+  color: black;
+  border: 1px solid silver;
+  transition: all .15s ease-in-out;
+  min-width: 27em;
+  width: 100%;
+  min-height: 15em;
+  position: relative;
+}
+
+.jobPosition {
+  padding: .7em;
+  border-bottom: 1px solid silver;
+  background: rgba(252, 245, 36, 0.3);
+  display: flex;
+
+  & h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    transform: translate3d( 0, 0, 0);
+    float: left;
+    margin: 0;
+    max-width: 17em;
+  }
+}
+
+.description {
+  overflow: hidden;
+  padding: 1em 1em 3em 1em;
+}
+
+.apply {
+  border-top: 1px solid black !important;
+  border-radius: 0 !important;
+  position: absolute !important;
+  bottom: 0 !important;
+}
+
+.fileInput {
+    display: none !important;
+}
+
+.jobMeta {
+  text-align: right;
+  display: inline-block;
+  flex: 1;
+
+  & p {
+    display: inline-block;
+    padding: .5% 2%;
+    margin: 0;
+
+    & i {
+      margin-right: .5em;
+    }
+  }
+}

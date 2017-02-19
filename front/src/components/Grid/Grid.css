@@ -1,0 +1,17 @@
+.grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  //justify-content: space-between;
+  margin: -1%;
+  padding: 0 2%;
+}
+
+.gridItem {
+  margin: 1%;
+  margin-bottom: 1.5em;
+  //flex-basis: 48%;
+  flex-basis: 100%;
+  padding: 0 !important;
+  min-width: 35em;
+}

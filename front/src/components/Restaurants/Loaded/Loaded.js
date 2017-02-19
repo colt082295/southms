@@ -10,7 +10,7 @@ import s from './Loaded.css';
 class Loaded extends React.Component {
 
   state = {
-    jobs: this.props.jobs.data,
+    restaurants: this.props.restaurants.data,
   }
 
   render() {
@@ -18,36 +18,25 @@ class Loaded extends React.Component {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          {this.state.jobs.map(function (job, i) {
-
-            job.salary = Numeral(job.salary).format('$0,0[.]00');
-            //job.time = Moment(job.dateCreated.date).format("M/D - ha");
-            job.time = Moment(job.dateCreated.date).format("M/D");
-            job.description = striptags(job.description, [], '\n');;
+          {this.state.restaurants.map(function (restaurant, i) {
+            restaurant.description = striptags(restaurant.description, [], '\n');;
 
 
             return (
-              <div className={s.jobContainer} key={job.id}>
-                <a href={"/job/" + job.id} className={s.job}>
+              <div className={s.jobContainer} key={restaurant.id}>
+                <a href={"/restaurants/" + restaurant.id} className={s.job}>
                     <div className={s.jobPosition}>
-                      <h3>{job.position}</h3>
+                      <h3>{restaurant.title}</h3>
                       <div className={s.jobMeta}>
-                        <p><i className="fa fa-briefcase" aria-hidden="true"></i>{job.type}</p>
-                        <p><i className="fa fa-tag" aria-hidden="true"></i>{job.category}</p>
-                        <p><i className="fa fa-money" aria-hidden="true"></i>{job.salary}</p>
-                        <p><i className="fa fa-map-marker" aria-hidden="true"></i>{job.city}</p>
-                        <p><i className="fa fa-calendar" aria-hidden="true"></i>{job.time}</p>
+                        <p><i className="fa fa-tag" aria-hidden="true"></i>{restaurant.type}</p>
+                        <p><i className="fa fa-map-marker" aria-hidden="true"></i>{restaurant.city}</p>
                       </div>
-                    </div>
-                    <div className={s.description}>
-                      <div className={s.descriptionText}><p>{job.description}</p></div>
-                      <div className={s.viewFull}><Button basic color='blue'>View Job</Button></div>
                     </div>
                 </a>
               </div>
             );
           })}
-          <Pagination pagination={this.props.pagination} data={this.props.data} onLoadChange={this.props.onLoadChange} changeData={this.props.changeJobs} />
+          <Pagination pagination={this.props.pagination} data={this.props.data} onLoadChange={this.props.onLoadChange} changeData={this.props.changeRestaurants} />
         </div>
       </div>
     );

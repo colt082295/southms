@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
-import geolocator from 'geolocator';
 import Loading from '../../Loading';
-import JobsLoaded from '../Loaded';
-import Sidebar from '../../Sidebar';
+import Loaded from '../Loaded';
+import Sidebar from '../../QuicklinksSidebar';
 import Filter from '../Filter';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Render.css';
@@ -12,16 +11,14 @@ class Render extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      jobs: this.props.jobs,
+      restaurants: this.props.restaurants,
       type: '*',
-      category: '*',
       city: '*',
       search: '',
       order: 'asc',
       orderParam: 'dateCreated',
-      url: 'http://www.southms.com/index.php/api/jobs.json?',
+      url: 'http://www.southms.com/index.php/api/restaurants.json?',
       urlSearch: 'http://www.southms.com/index.php/api/search.json?',
-      urlPagination: this.city,
       location: [],
       loading: false,
     };
@@ -32,9 +29,9 @@ class Render extends React.Component {
   onLoadChange(load) {
     this.setState(load);
   }
-  changeJobs(jobs) {
+  changeRestaurants(restaurants) {
     this.setState({
-      jobs: jobs,
+      restaurants: restaurants,
     });
   }
   changeBasicFilter(order, orderParam) {
@@ -43,35 +40,21 @@ class Render extends React.Component {
       orderParam: orderParam,
     });
   }
-  // Later I'll need to figure out how way to consolidate these functions into as little as possible.
-  updateJobLocation(city) {
-    // var newArray = this.state.type.slice();
-    // newArray.push(type);
-    //this.setState({ type: newArray });
+  updateLocation(city) {
     this.setState({ city: city });
   }
-  updateJobType(type) {
-    // var newArray = this.state.type.slice();
-    // newArray.push(type);
-    //this.setState({ type: newArray });
+  updateType(type) {
     this.setState({ type: type });
   }
-  updateJobCategory(category) {
-    console.log("Category update");
-    this.setState({ category: category });
-  }
-  updateJobSearch(search) {
-    // var newArray = this.state.type.slice();
-    // newArray.push(type);
-    //this.setState({ type: newArray });
+  updateSearch(search) {
     this.setState({ search: search });
   }
   render() {
     let render = null;
-    if (typeof this.state.jobs.data == 'undefined' && !this.state.jobs.data.length > 0 || this.state.loading == true) {
+    if (typeof this.state.restaurants.data == 'undefined' && !this.state.restaurants.data.length > 0 || this.state.loading == true) {
       render = <Loading />;
     } else {
-      render = <JobsLoaded jobs={this.state.jobs} pagination={this.props.pagination} data={this.state} onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeJobs.bind(this)} />;
+      render = <Loaded restaurants={this.state.restaurants} pagination={this.props.pagination} data={this.state} onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeRestaurants.bind(this)} />;
     }
 
     let city = {
@@ -80,12 +63,12 @@ class Render extends React.Component {
 
     return (
       <div className={s.root}>
-        <Filter onLoadChange={this.onLoadChange.bind(this)} updateJobSearch={this.updateJobSearch.bind(this)} changeJobs={this.changeJobs.bind(this)} changeBasicFilter={this.changeBasicFilter.bind(this)} data={this.state} jobs={this.state.jobs} jobInfo={this.props.jobInfo} location={this.state.location} onLoadChange={this.onLoadChange.bind(this)} changeJobs={this.changeJobs.bind(this)} data={this.state} updateJobCategory={this.updateJobCategory.bind(this)} updateJobType={this.updateJobType.bind(this)} updateJobLocation={this.updateJobLocation.bind(this)} />
+        <Filter onLoadChange={this.onLoadChange.bind(this)} updateSearch={this.updateSearch.bind(this)} changeRestaurants={this.changeRestaurants.bind(this)} changeBasicFilter={this.changeBasicFilter.bind(this)} data={this.state} restaurants={this.state.restaurants} restaurantsInfo={this.props.restaurantsInfo} location={this.state.location} onLoadChange={this.onLoadChange.bind(this)} updateType={this.updateType.bind(this)} updateLocation={this.updateLocation.bind(this)} />
         <div className={s.container}>
-          <div className={s.jobs}>
-            {render}
-          </div>
-          <Sidebar city={city} />
+          <main>
+              {render}
+          </main>
+          <Sidebar />
         </div>
       </div>
     );

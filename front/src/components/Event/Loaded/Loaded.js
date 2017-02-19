@@ -7,16 +7,16 @@ import s from './Loaded.css';
 class Loaded extends React.Component {
   render() {
     const data = this.props.event;
-    const time = Moment(data.eventTime.date).format("h:mm A [on] MMMM Do");
+    const time = Moment(data.time.date).format("h:mm A [on] MMMM Do");
 
     return (
       <div className={s.root}>
         <div className={s.container}>
                 <div className={s.job}>
                   <div className={s.jobPosition}>
-                    <h3>{data.eventName}</h3>
+                    <h3>{data.title}</h3>
                     <div className={s.meta}>
-                      <p>At {time} in {data.eventCity}</p>
+                      <p>At {time} in {data.city}</p>
                     </div>
                   </div>
                   <div className={s.image}>

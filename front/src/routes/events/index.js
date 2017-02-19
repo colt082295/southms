@@ -15,16 +15,18 @@ export default {
     //console.log("Running fetch!", params, path, uri);
     const resp = await fetch('http://www.southms.com/index.php/api/events.json?city=*');
     const events = await resp.json();
+    const eventTypes = await fetch('http://www.southms.com/index.php/api/event-types.json');
+    const eventTypesData = await eventTypes.json();
     const cities = await fetch('http://www.southms.com/index.php/api/cities.json');
     const citiesData = await cities.json();
-    console.log("cities:", citiesData.data);
 
-    const eventInfo = {
-      allLocations: citiesData.data,
+    const eventsInfo = {
+      types: eventTypesData.types,
+      locations: citiesData.data,
     };
-    return events && eventInfo && {
+    return events && {
       title,
-      component: <Layout><Events title={title} events={events} eventInfo={eventInfo} /></Layout>,
+      component: <Layout><Events title={title} events={events} eventsInfo={eventsInfo} /></Layout>,
     };
   },
 };

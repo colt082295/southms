@@ -8,7 +8,7 @@ const title = 'Job';
 
 export default {
 
-  path: '/job/:id',
+  path: '/jobs/:id',
 
   async action({ params, path, uri }) {
     // const route = await next();

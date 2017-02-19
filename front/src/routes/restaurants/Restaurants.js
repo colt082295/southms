@@ -4,11 +4,19 @@ import Render from '../../components/Restaurants/Render';
 import s from './Restaurants.css';
 
 class Restaurants extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      restaurants: [],
+      loading: true,
+    };
+  }
+
   render() {
     return (
       <div className={s.root}>
         <div className={s.container}>
-          <Render city={this.props.city} />
+          <Render loading={this.state.loading} restaurants={this.props.restaurants} restaurantsInfo={this.props.restaurantsInfo} pagination={this.props.restaurants.meta.pagination} />
         </div>
       </div>
     );

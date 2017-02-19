@@ -9,8 +9,8 @@ class Filter extends React.Component {
   state = {
     order: this.props.data.order,
     orderParam: this.props.data.orderParam,
-    categories: [],
-    locations: [],
+    types: this.props.eventsInfo.types,
+    locations: this.props.eventsInfo.locations,
   }
 
   orderChanged(event, data) {
@@ -24,7 +24,7 @@ class Filter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + data.value + "&city=" + this.props.data.city)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + data.value + "&type=" + this.props.data.type + "&city=" + this.props.data.city)
         .then(function(result) {
           _this.props.changeEvents(result.data)
           _this.props.onLoadChange({loading: false});
@@ -42,7 +42,7 @@ class Filter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + data.value + '&order=' + this.props.data.order + "&city=" + this.props.data.city)
+        .get(this.props.data.url + 'orderParam=' + data.value + '&order=' + this.props.data.order + "&city=" + this.props.data.city + "&type=" + this.props.data.type)
         .then(function(result) {
           _this.props.changeEvents(result.data)
           _this.props.onLoadChange({loading: false});
@@ -50,13 +50,11 @@ class Filter extends React.Component {
   }
 
   componentDidMount() {
-    let categories = [];
-    let locations = [];
-      this.setState({ locations: this.props.eventInfo.allLocations });
+
   }
 
   componentWillUnmount() {
-    // this.serverRequest.abort();
+    this.serverRequest.abort();
   }
 
   locationChanged(event, data) {
@@ -75,7 +73,28 @@ class Filter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + "&city=" + val)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + "&type=" + this.props.data.type + "&city=" + val)
+        .then(function(result) {
+          _this.props.changeEvents(result.data)
+          _this.props.onLoadChange({loading: false});
+        })
+  }
+  typeChanged(event, data) {
+    const _this = this;
+    _this.props.onLoadChange({loading: true});
+    var val = data.value;
+
+    if(val.length > 0) {
+      this.props.updateType(val);
+      val = val.join();
+    } else {
+      this.props.updateType('*');
+      val = '*';
+    }
+    this.serverRequest =
+      axios
+      // I have to figure out some way to get the value from the other
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + "&type=" + val + "&city=" + this.props.data.city)
         .then(function(result) {
           _this.props.changeEvents(result.data)
           _this.props.onLoadChange({loading: false});
@@ -91,7 +110,7 @@ class Filter extends React.Component {
     this.serverRequest =
       axios
       // I have to figure out some way to get the value from the other
-        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + "&city=" + this.props.data.city + "&term=" + val)
+        .get(this.props.data.url + 'orderParam=' + this.props.data.orderParam + '&order=' + this.props.data.order + "&city=" + this.props.data.city + "&type=" + this.props.data.type + "&term=" + val)
         .then(function(result) {
           _this.props.changeEvents(result.data)
           _this.props.onLoadChange({loading: false});
@@ -112,6 +131,7 @@ class Filter extends React.Component {
     return (
       <div className={s.container}>
         <div className={s.left}>
+          <Dropdown placeholder='Choose Types' multiple search selection scrolling options={this.state.types} onChange={this.typeChanged.bind(this)} />
           <Dropdown placeholder='Choose Locations' multiple search selection scrolling options={this.state.locations} onChange={this.locationChanged.bind(this)} />
         </div>
         <div className={s.right}>

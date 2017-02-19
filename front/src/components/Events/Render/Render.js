@@ -2,13 +2,14 @@ import React, { PropTypes } from 'react';
 import Loading from '../../Loading';
 import Loaded from '../Loaded';
 import Filter from '../Filter';
+import Sidebar from '../../QuicklinksSidebar';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Render.css';
 
 class Render extends React.Component {
   state = {
     events: this.props.events,
-    category: '*',
+    type: '*',
     city: '*',
     search: '',
     order: 'asc',
@@ -35,21 +36,13 @@ class Render extends React.Component {
       orderParam: orderParam,
     });
   }
-  // Later I'll need to figure out how way to consolidate these functions into as little as possible.
   updateLocation(city) {
-    // var newArray = this.state.type.slice();
-    // newArray.push(type);
-    //this.setState({ type: newArray });
     this.setState({ city: city });
   }
-  updateCategory(category) {
-    console.log("Category update");
-    this.setState({ category: category });
+  updateType(type) {
+    this.setState({ type: type });
   }
   updateSearch(search) {
-    // var newArray = this.state.type.slice();
-    // newArray.push(type);
-    //this.setState({ type: newArray });
     this.setState({ search: search });
   }
 
@@ -63,11 +56,12 @@ class Render extends React.Component {
 
     return (
       <div className={s.root}>
-        <Filter events={this.state.events} updateSearch={this.updateSearch.bind(this)} changeFilter={this.changeFilter.bind(this)} data={this.state} eventInfo={this.props.eventInfo} location={this.state.location} onLoadChange={this.onLoadChange.bind(this)} changeEvents={this.changeEvents.bind(this)} data={this.state} updateCategory={this.updateCategory.bind(this)} updateLocation={this.updateLocation.bind(this)} />
+        <Filter events={this.state.events} updateSearch={this.updateSearch.bind(this)} changeFilter={this.changeFilter.bind(this)} data={this.state} eventsInfo={this.props.eventsInfo} location={this.state.location} onLoadChange={this.onLoadChange.bind(this)} changeEvents={this.changeEvents.bind(this)} data={this.state} updateType={this.updateType.bind(this)} updateLocation={this.updateLocation.bind(this)} />
         <div className={s.container}>
-          <div className={s.jobs}>
-            {render}
-          </div>
+          <main>
+              {render}
+          </main>
+          <Sidebar />
         </div>
       </div>
     );
